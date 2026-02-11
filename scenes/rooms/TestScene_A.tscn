@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvp0hosbdp0av"]
+
+[ext_resource type="PackedScene" uid="uid://colqt1a2lsves" path="res://scenes/prefabs/PlayerCharacter.tscn" id="1_prdxn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w6ruc"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_prdxn"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="Environment" id="Environment_prdxn"]
+background_mode = 2
+ambient_light_color = Color(0.21568628, 0.21568628, 0.25490198, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.4
+tonemap_exposure = 2.0
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.06784487, 0.1590676, 0.30538094, 1)
+fog_light_energy = 0.0
+fog_density = 0.2
+fog_aerial_perspective = 1.0
+fog_height_density = 0.8
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="TestSceneA" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_w6ruc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_prdxn")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_prdxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_prdxn")
