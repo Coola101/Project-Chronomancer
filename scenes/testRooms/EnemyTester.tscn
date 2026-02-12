@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkg5ktedo1lyl"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qosdu"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qosdu"]
+
+[node name="EnemyTester" type="Node3D"]
+
+[node name="EnemySprite" type="Sprite3D" parent="."]
+pixel_size = 1.0
+billboard = 1
+texture = SubResource("PlaceholderTexture2D_qosdu")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = -2.0
+path_postprocessing = 1
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_qosdu")
