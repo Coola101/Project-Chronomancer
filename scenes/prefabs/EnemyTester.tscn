@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvmwvax6gany6"]
 
-[ext_resource type="Script" uid="uid://b0rsqdmewj2pk" path="res://scripts/Enemy/EnemyTracking.gd" id="1_0kupw"]
+[ext_resource type="Script" uid="uid://b0rsqdmewj2pk" path="res://scripts/Enemy/EnemyControl.gd" id="1_0kupw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0kupw"]
 

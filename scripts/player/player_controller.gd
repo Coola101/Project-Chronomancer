@@ -1,9 +1,10 @@
 extends CharacterBody3D
 
 
-const ACCELERATION: float = 0.45 # Speed which the player acccelerates
+const ACCELERATION: float = 0.5 # Speed which the player acccelerates
 const MAX_SPEED: float = 6.5 # Top walking speed for the player
-const SPRINT_SPEED: float = 9.0
+const SPRINT_SPEED: float = 10.0
+const SPRINT_ACCELERATION: float = 0.75
 #const JUMP_VELOCITY = 4.5
 
 @onready var pivot := $CameraPivot
@@ -54,6 +55,7 @@ func move(speed: float) -> void:
 	var speed_cap: float
 	if Input.is_action_pressed("sprint"):
 		speed_cap = SPRINT_SPEED
+		# TODO:  Add call to recognize sound from sprint once added
 	else:
 		speed_cap = MAX_SPEED
 	
