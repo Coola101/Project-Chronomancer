@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://4oagl7iagj7y"]
 
-[ext_resource type="Texture2D" uid="uid://bcby3orfemj1l" path="res://assets/Sprites/Wall_Concept_Brick.png" id="1_oaokr"]
+[ext_resource type="Texture2D" uid="uid://05qcgv433lp8" path="res://assets/Sprites/wood_concept_2.png" id="1_oaokr"]
 [ext_resource type="Texture2D" uid="uid://ddkgejuyvrcq0" path="res://assets/Sprites/Snow_Path_Middle.png" id="1_udj4k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6b8q"]
