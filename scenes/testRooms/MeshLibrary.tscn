@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4oagl7iagj7y"]
+[gd_scene load_steps=11 format=3 uid="uid://4oagl7iagj7y"]
 
 [ext_resource type="Texture2D" uid="uid://05qcgv433lp8" path="res://assets/Sprites/wood_concept_2.png" id="1_oaokr"]
 [ext_resource type="Texture2D" uid="uid://ddkgejuyvrcq0" path="res://assets/Sprites/Snow_Path_Middle.png" id="1_udj4k"]
@@ -9,6 +9,8 @@
 albedo_texture = ExtResource("1_oaokr")
 uv1_scale = Vector3(3, 2, 1)
 texture_filter = 0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oaokr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yffsq"]
 size = Vector3(0.05, 1, 1)
@@ -25,6 +27,8 @@ stencil_flags = 2
 lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_yffsq")
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yffsq"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yvl76"]
 
 [node name="MeshLibrary" type="Node3D"]
@@ -39,6 +43,7 @@ mesh = SubResource("BoxMesh_x6b8q")
 surface_material_override/0 = SubResource("StandardMaterial3D_oaokr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+physics_material_override = SubResource("PhysicsMaterial_oaokr")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Wall/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 0, 0)
@@ -61,6 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("BoxMesh_pvdpn")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+physics_material_override = SubResource("PhysicsMaterial_yffsq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("BoxShape3D_yvl76")
