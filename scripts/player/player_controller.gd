@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const ACCELERATION: float = 0.5 # Speed which the player acccelerates
 const MAX_SPEED: float = 6.5 # Top walking speed for the player
-const SPRINT_SPEED: float = 10.0
+const SPRINT_SPEED: float = 9.5
 const SPRINT_ACCELERATION: float = 0.75
 #const JUMP_VELOCITY = 4.5
 

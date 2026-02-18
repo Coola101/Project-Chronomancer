@@ -45,7 +45,7 @@ albedo_texture = ExtResource("1_uunj7")
 uv1_scale = Vector3(3, 2, 1)
 texture_filter = 0
 
-[sub_resource type="BoxMesh" id="BoxMesh_ohk3s"]
+[sub_resource type="BoxMesh" id="BoxMesh_mevcf"]
 material = SubResource("StandardMaterial3D_mevcf")
 
 [sub_resource type="Image" id="Image_tieln"]
@@ -57,7 +57,7 @@ data = {
 "width": 64
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_i4l1d"]
+[sub_resource type="ImageTexture" id="ImageTexture_tc5nr"]
 image = SubResource("Image_tieln")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_exr2c"]
@@ -71,7 +71,7 @@ texture_filter = 0
 texture_repeat = false
 stencil_flags = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_l3ii7"]
+[sub_resource type="BoxMesh" id="BoxMesh_i4l1d"]
 lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_yffsq")
 
@@ -84,7 +84,7 @@ data = {
 "width": 64
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_2734y"]
+[sub_resource type="ImageTexture" id="ImageTexture_l3ii7"]
 image = SubResource("Image_lpn7j")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yvl76"]
@@ -107,18 +107,18 @@ item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
 item/1/navigation_layers = 1
 item/1/preview = SubResource("ImageTexture_lpn7j")
 item/2/name = "Wall"
-item/2/mesh = SubResource("BoxMesh_ohk3s")
+item/2/mesh = SubResource("BoxMesh_mevcf")
 item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/mesh_cast_shadow = 1
 item/2/shapes = [SubResource("BoxShape3D_exr2c"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 0, 0), SubResource("BoxShape3D_exr2c"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 0, 0), SubResource("BoxShape3D_exr2c"), Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0.475), SubResource("BoxShape3D_exr2c"), Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -0.475)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
-item/2/preview = SubResource("ImageTexture_i4l1d")
+item/2/preview = SubResource("ImageTexture_tc5nr")
 item/3/name = "Floor"
-item/3/mesh = SubResource("BoxMesh_l3ii7")
+item/3/mesh = SubResource("BoxMesh_i4l1d")
 item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/mesh_cast_shadow = 1
 item/3/shapes = [SubResource("BoxShape3D_yvl76"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/navigation_layers = 1
-item/3/preview = SubResource("ImageTexture_2734y")
+item/3/preview = SubResource("ImageTexture_l3ii7")

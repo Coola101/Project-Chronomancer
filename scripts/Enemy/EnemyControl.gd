@@ -7,53 +7,61 @@ enum EnemyState {
 }
 
 @onready var navigation = $NavigationAgent3D
+@onready var rayCast = $RayCast3D
 @onready var currentState = EnemyState.Idling
 @onready var aggression: float = 0
+var Player: CollisionObject3D
+var stunCheck
+var coolCheck
 
 func _ready() -> void:
+	rayCast.exclude_parent = true;
+	await get_tree().create_timer(5).timeout
 	changeState(EnemyState.Stalking)
 
 var playerLocation: Vector3
-var playerRID: RID
 var rng = RandomNumberGenerator.new()
+var currentLocation
 
 func update_target_location(location):
 	playerLocation = location
 
-func set_player_RID(pl):
-	playerRID = pl
+func set_player(pl):
+	Player = pl
+	rayCast.add_exception(Player)
 
 const chaseSpeed: float = 7.5
 const stalkSpeed: float = 2.5
-const stalkRadius: float = 15
+const stalkRadius: float = 10
 const difficulty: float = 1
 const threshold: float = 100
-
+const MAX_DISTANCE: float = 100
+const STUN_TIME: float = 2.5
+const COOLDOWN_TIME: float = 10
 
 func _physics_process(_delta):
-	var currentLocation = global_transform.origin
+	currentLocation = global_transform.origin
 	match currentState:
 		EnemyState.Stalking:
-			if(navigation.target_reached || !navigation.is_target_reachable()):
+			if(navigation.is_target_reached() || !navigation.is_target_reachable()):
 				navigation.target_position = getNewStalkTarget()
+				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 			
 			#Look for player
-			var space_state = get_world_3d().direct_space_state
-			var queery = PhysicsRayQueryParameters3D.create(currentLocation, playerLocation)
-			queery.exclude = [self, playerRID]
-			var result = space_state.intersect_ray(queery)
-			if(result.is_empty()):
-				print("Success")
-				changeState(EnemyState.Chasing)
-			else:
-				print(result.keys())
-				#aggression -= 1/difficulty
-				#if(aggression <= 0):
-					#changeState(EnemyState.Cooldown)
+			var EnemyToPlayer = playerLocation - currentLocation
+			if(abs(EnemyToPlayer.length()) <= MAX_DISTANCE):
+				rayCast.target_position = EnemyToPlayer
+				rayCast.force_raycast_update()
+				if(!rayCast.is_colliding()):
+					changeState(EnemyState.Chasing)
+				#else:
+					#aggression -= 1/difficulty
+					#if(aggression <= 0):
+						#changeState(EnemyState.Cooldown)
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
@@ -63,7 +71,21 @@ func _physics_process(_delta):
 			#Current implemented AI
 		EnemyState.Stunned:
 			velocity = Vector3(0,0,0)
-			#recover time
+			if(!stunCheck):
+				stunDelay()
+		EnemyState.Cooldown:
+			if(!coolCheck):
+				coolDelay()
+
+func stunDelay():
+	stunCheck = true
+	await get_tree().create_timer(STUN_TIME).timeout
+	#Check if chase time is up
+	changeState(EnemyState.Chasing)
+
+func coolDelay():
+	coolCheck = false
+	await get_tree().create_timer(COOLDOWN_TIME).timeout
 
 func getNewStalkTarget() -> Vector3:
 	var x_pos = randf_range(playerLocation.x - stalkRadius, playerLocation.x + stalkRadius)
@@ -75,11 +97,19 @@ func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
 			#emerge
-			getNewStalkTarget()
+			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
 			velocity = Vector3(0,0,0)
+			await get_tree().create_timer(0.5).timeout
+			#check if coming out of stun, or out of stalk/idle
 			#play sound
 			#delay
+		EnemyState.Stunned:
+			#Stun sound & animation
+			stunCheck = false
+		EnemyState.Cooldown:
+			#retreat into wall
+			coolCheck = false
 	currentState = newState
 
 func _sound_call(sound: float):

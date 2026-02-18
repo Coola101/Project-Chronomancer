@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvmwvax6gany6"]
+[gd_scene load_steps=6 format=3 uid="uid://dvmwvax6gany6"]
 
 [ext_resource type="Script" uid="uid://b0rsqdmewj2pk" path="res://scripts/Enemy/EnemyControl.gd" id="1_0kupw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0kupw"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l0fi6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc36q"]
+albedo_color = Color(1, 0.13999999, 0.13999999, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h72rr"]
+material = SubResource("StandardMaterial3D_fc36q")
 
 [node name="EnemyBody" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_0kupw")
@@ -14,9 +20,21 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("CylinderShape3D_0kupw")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_height_offset = -2.0
+path_height_offset = -1.0
+simplify_path = true
+radius = 0.6
 
 [node name="EnemySprite" type="Sprite3D" parent="."]
 pixel_size = 1.0
 billboard = 1
 texture = SubResource("PlaceholderTexture2D_l0fi6")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 0)
+collision_mask = 15
+hit_from_inside = true
+debug_shape_custom_color = Color(0.8790166, 0, 0.17706412, 1)
+
+[node name="Target" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("SphereMesh_h72rr")
