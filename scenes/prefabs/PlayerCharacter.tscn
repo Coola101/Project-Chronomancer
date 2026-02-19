@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
-[ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scenes/prefabs/PlayerInteract_Detector.gd" id="2_htlai"]
+[ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
 

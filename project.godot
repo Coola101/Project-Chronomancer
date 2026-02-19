@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Enemy="The Enemy"
 generator_fuel=""
+generator_deposit=""
 
 [input]
 

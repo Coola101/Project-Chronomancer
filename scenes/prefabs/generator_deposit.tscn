@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://1701x6w036hn"]
+
+[ext_resource type="Script" uid="uid://co3c4nl357j6o" path="res://scripts/generator_deposit.gd" id="1_kbs48"]
+[ext_resource type="Texture2D" uid="uid://dwwfibjvibpyc" path="res://assets/Sprites/generator.png" id="1_rcdtx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ysh4t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw55u"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11s8k"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kcph"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hilbo"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbs48"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcthi"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hcthi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw55u")
+}],
+"loop": true,
+"name": &"0",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11s8k")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kcph")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hilbo")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbs48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcthi")
+}],
+"loop": true,
+"name": &"4",
+"speed": 15.0
+}]
+
+[node name="GeneratorDeposit" type="Area3D" groups=["generator_deposit"]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_kbs48")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ysh4t")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.0313
+billboard = 1
+shaded = true
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_hcthi")
+animation = &"0"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
