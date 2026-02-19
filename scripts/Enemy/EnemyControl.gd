@@ -11,8 +11,9 @@ enum EnemyState {
 @onready var currentState = EnemyState.Idling
 @onready var aggression: float = 0
 var Player: CollisionObject3D
-var stunCheck
-var coolCheck
+var stunCheck: bool
+var coolCheck: bool
+var chaseCheck: bool
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
@@ -36,9 +37,10 @@ const stalkSpeed: float = 2.5
 const stalkRadius: float = 10
 const difficulty: float = 1
 const threshold: float = 100
-const MAX_DISTANCE: float = 100
+const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
 const COOLDOWN_TIME: float = 10
+const CHASE_TIME: float = 180
 
 func _physics_process(_delta):
 	currentLocation = global_transform.origin
@@ -69,6 +71,8 @@ func _physics_process(_delta):
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
+			if(!chaseCheck):
+				chaseTimer()
 			#Check if safe zone
 		EnemyState.Stunned:
 			velocity = Vector3(0,0,0)
@@ -79,6 +83,10 @@ func _physics_process(_delta):
 				coolDelay()
 	#Check collision w/ player
 	#Deal damage
+
+func chaseTimer():
+	chaseCheck = true;
+	await get_tree().create_timer(CHASE_TIME).timeout
 
 func stunDelay():
 	stunCheck = true
