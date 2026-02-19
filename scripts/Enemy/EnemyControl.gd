@@ -13,6 +13,7 @@ enum EnemyState {
 var Player: CollisionObject3D
 var stunCheck
 var coolCheck
+var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
 	rayCast.exclude_parent = true;
@@ -21,7 +22,7 @@ func _ready() -> void:
 
 var playerLocation: Vector3
 var rng = RandomNumberGenerator.new()
-var currentLocation
+var currentLocation: Vector3
 
 func update_target_location(location):
 	playerLocation = location
@@ -45,7 +46,7 @@ func _physics_process(_delta):
 		EnemyState.Stalking:
 			if(navigation.is_target_reached() || !navigation.is_target_reachable()):
 				navigation.target_position = getNewStalkTarget()
-				$Target.position = navigation.target_position
+				#$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
@@ -68,7 +69,7 @@ func _physics_process(_delta):
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
-			#Current implemented AI
+			#Check if safe zone
 		EnemyState.Stunned:
 			velocity = Vector3(0,0,0)
 			if(!stunCheck):
@@ -76,16 +77,20 @@ func _physics_process(_delta):
 		EnemyState.Cooldown:
 			if(!coolCheck):
 				coolDelay()
+	#Check collision w/ player
+	#Deal damage
 
 func stunDelay():
 	stunCheck = true
 	await get_tree().create_timer(STUN_TIME).timeout
 	#Check if chase time is up
-	changeState(EnemyState.Chasing)
+	if(currentState == EnemyState.Stunned): (EnemyState.Chasing)
 
 func coolDelay():
 	coolCheck = false
 	await get_tree().create_timer(COOLDOWN_TIME).timeout
+	if(currentState == EnemyState.Cooldown): 
+		changeState(EnemyState.Idling)
 
 func getNewStalkTarget() -> Vector3:
 	var x_pos = randf_range(playerLocation.x - stalkRadius, playerLocation.x + stalkRadius)
@@ -97,13 +102,15 @@ func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
 			#emerge
+			#
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
 			velocity = Vector3(0,0,0)
 			await get_tree().create_timer(0.5).timeout
-			#check if coming out of stun, or out of stalk/idle
-			#play sound
-			#delay
+			#if(currentState == EnemyState.Stalking):
+				#Roar
+			#if(currentState == EnemyState.Stunned):
+				#Snarl
 		EnemyState.Stunned:
 			#Stun sound & animation
 			stunCheck = false
