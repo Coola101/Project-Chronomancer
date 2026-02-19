@@ -14,6 +14,7 @@ var Player: CollisionObject3D
 var stunCheck: bool
 var coolCheck: bool
 var chaseCheck: bool
+@onready var player_safe_zone: bool = false
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
@@ -41,8 +42,13 @@ const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
 const COOLDOWN_TIME: float = 10
 const CHASE_TIME: float = 180
+const AGGRESSION_INTERVAL: float = 0.5
+const SPAWN_DISTANCE: float = 30
 
-func _physics_process(_delta):
+var aggressionTimer: float
+var activeSpawnPoint: Node3D
+
+func _physics_process(delta):
 	currentLocation = global_transform.origin
 	match currentState:
 		EnemyState.Stalking:
@@ -61,10 +67,14 @@ func _physics_process(_delta):
 				rayCast.force_raycast_update()
 				if(!rayCast.is_colliding()):
 					changeState(EnemyState.Chasing)
-				#else:
-					#aggression -= 1/difficulty
-					#if(aggression <= 0):
-						#changeState(EnemyState.Cooldown)
+				#Reduce aggression per interval until aggression is at 1/4
+				else:
+					aggressionTimer += delta
+					if(aggressionTimer >= AGGRESSION_INTERVAL):
+						aggressionTimer -= AGGRESSION_INTERVAL
+						aggression -= 1
+						if(aggression <= threshold/4):
+							changeState(EnemyState.Cooldown)
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
@@ -73,6 +83,8 @@ func _physics_process(_delta):
 			move_and_slide()
 			if(!chaseCheck):
 				chaseTimer()
+			if(player_safe_zone):
+				changeState(EnemyState.Cooldown)
 			#Check if safe zone
 		EnemyState.Stunned:
 			velocity = Vector3(0,0,0)
@@ -81,17 +93,22 @@ func _physics_process(_delta):
 		EnemyState.Cooldown:
 			if(!coolCheck):
 				coolDelay()
+		EnemyState.Idling:
+			aggressionTimer += delta
+			if(aggressionTimer >= AGGRESSION_INTERVAL):
+				aggressionTimer -= AGGRESSION_INTERVAL
+				_sound_call(1)
 	#Check collision w/ player
 	#Deal damage
 
 func chaseTimer():
 	chaseCheck = true;
 	await get_tree().create_timer(CHASE_TIME).timeout
+	if(currentState == EnemyState.Chasing || currentState == EnemyState.Stunned): changeState(EnemyState.Cooldown)
 
 func stunDelay():
 	stunCheck = true
 	await get_tree().create_timer(STUN_TIME).timeout
-	#Check if chase time is up
 	if(currentState == EnemyState.Stunned): (EnemyState.Chasing)
 
 func coolDelay():
@@ -110,7 +127,9 @@ func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
 			#emerge
-			#
+			findSpawnPoint(1)
+			spawnAtPoint()
+			aggressionTimer = 0
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
 			velocity = Vector3(0,0,0)
@@ -125,7 +144,23 @@ func changeState(newState: EnemyState):
 		EnemyState.Cooldown:
 			#retreat into wall
 			coolCheck = false
+		EnemyState.Idling:
+			aggressionTimer = 0
 	currentState = newState
+
+func findSpawnPoint(mult: int):
+	var viablePoints: Array[Node3D]
+	for point in spawnPoints:
+		var EnemyToPoint = point.global_transform.origin - playerLocation
+		if(EnemyToPoint <= SPAWN_DISTANCE * mult):
+			viablePoints[viablePoints.size()-1] = point
+	if(viablePoints.size() == 0): findSpawnPoint(2)
+	else:
+		var rand = rng.randi_range(0, viablePoints.size())
+		activeSpawnPoint = spawnPoints[rand]
+
+func spawnAtPoint():
+	var a = 0
 
 func _sound_call(sound: float):
 	aggression += (sound * difficulty)
