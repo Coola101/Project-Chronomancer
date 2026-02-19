@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b13cdsocjpdpl"]
+[gd_scene load_steps=8 format=3 uid="uid://b13cdsocjpdpl"]
 
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_762s5"]
 [ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_ldeur"]
@@ -16,24 +16,6 @@ agent_height = 0.5
 agent_radius = 0.4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_762s5"]
-
-[sub_resource type="Environment" id="Environment_v6jby"]
-background_mode = 2
-ambient_light_color = Color(0.21568628, 0.21568628, 0.29411766, 1)
-ambient_light_sky_contribution = 0.5
-ambient_light_energy = 0.4
-tonemap_exposure = 2.0
-ssao_enabled = true
-fog_enabled = true
-fog_light_color = Color(0.15686275, 0.15686275, 0.21568628, 1)
-fog_light_energy = 0.0
-fog_density = 0.2
-fog_aerial_perspective = 1.0
-fog_height_density = 0.8
-volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.15686275, 0.15686275, 0.29411766, 1)
-volumetric_fog_emission = Color(0, 0, 0.019607844, 1)
-volumetric_fog_emission_energy = 0.8
 
 [node name="NavTests" type="Node3D"]
 script = ExtResource("1_762s5")
@@ -80,6 +62,3 @@ shortcut_keys_enabled = false
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v6jby")

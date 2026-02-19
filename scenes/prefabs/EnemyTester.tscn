@@ -1,10 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvmwvax6gany6"]
 
 [ext_resource type="Script" uid="uid://b0rsqdmewj2pk" path="res://scripts/Enemy/EnemyControl.gd" id="1_0kupw"]
+[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="2_h72rr"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0kupw"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l0fi6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc36q"]
 albedo_color = Color(1, 0.13999999, 0.13999999, 1)
@@ -25,9 +24,11 @@ simplify_path = true
 radius = 0.6
 
 [node name="EnemySprite" type="Sprite3D" parent="."]
-pixel_size = 1.0
+pixel_size = 0.0313
 billboard = 1
-texture = SubResource("PlaceholderTexture2D_l0fi6")
+shaded = true
+texture_filter = 0
+texture = ExtResource("2_h72rr")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)
@@ -37,4 +38,5 @@ debug_shape_custom_color = Color(0.8790166, 0, 0.17706412, 1)
 
 [node name="Target" type="MeshInstance3D" parent="."]
 top_level = true
+visible = false
 mesh = SubResource("SphereMesh_h72rr")
