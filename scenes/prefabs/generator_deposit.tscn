@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1701x6w036hn"]
+[gd_scene load_steps=12 format=3 uid="uid://1701x6w036hn"]
 
 [ext_resource type="Script" uid="uid://co3c4nl357j6o" path="res://scripts/generator_deposit.gd" id="1_kbs48"]
 [ext_resource type="Texture2D" uid="uid://dwwfibjvibpyc" path="res://assets/Sprites/generator.png" id="1_rcdtx"]
@@ -75,6 +75,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_kbs48"]
+size = Vector3(0.8, 1, 0.8)
+
 [node name="GeneratorDeposit" type="Area3D" groups=["generator_deposit"]]
 collision_layer = 8
 collision_mask = 8
@@ -90,5 +93,10 @@ shaded = true
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_hcthi")
 animation = &"0"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_kbs48")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
