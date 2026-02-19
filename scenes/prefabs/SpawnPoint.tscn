@@ -1,6 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://crpmwhc04d3hg"]
 
-[ext_resource type="Script" uid="uid://cgne5ug0wjeme" path="res://scripts/Enemy/SpawnPoint.gd" id="1_aunpn"]
+[ext_resource type="Texture2D" uid="uid://dgym6cw5ovmgd" path="res://assets/Sprites/Blood_Splatter_Concept_1.png" id="2_k5phq"]
 
 [node name="SpawnPoint" type="Node3D"]
-script = ExtResource("1_aunpn")
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.025
+texture = ExtResource("2_k5phq")

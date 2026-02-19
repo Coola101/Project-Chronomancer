@@ -25,6 +25,8 @@ func _ready() -> void:
 var playerLocation: Vector3
 var rng = RandomNumberGenerator.new()
 var currentLocation: Vector3
+var activeSpawnPoint: Node3D
+var defaultSpawnPoint: Node3D
 
 func update_target_location(location):
 	playerLocation = location
@@ -32,6 +34,10 @@ func update_target_location(location):
 func set_player(pl):
 	Player = pl
 	rayCast.add_exception(Player)
+
+func initalize_spawn_points(allPoints: Array[Node3D]):
+	defaultSpawnPoint = allPoints[0]
+	spawnPoints = allPoints
 
 const chaseSpeed: float = 7.5
 const stalkSpeed: float = 2.5
@@ -46,7 +52,6 @@ const AGGRESSION_INTERVAL: float = 0.5
 const SPAWN_DISTANCE: float = 30
 
 var aggressionTimer: float
-var activeSpawnPoint: Node3D
 
 func _physics_process(delta):
 	currentLocation = global_transform.origin
@@ -152,15 +157,21 @@ func findSpawnPoint(mult: int):
 	var viablePoints: Array[Node3D]
 	for point in spawnPoints:
 		var EnemyToPoint = point.global_transform.origin - playerLocation
-		if(EnemyToPoint <= SPAWN_DISTANCE * mult):
-			viablePoints[viablePoints.size()-1] = point
-	if(viablePoints.size() == 0): findSpawnPoint(2)
+		if(EnemyToPoint.length() <= SPAWN_DISTANCE * mult):
+			viablePoints.append(point)
+	if(viablePoints.size() == 0): 
+		findSpawnPoint(mult+1)
+		if(mult >= 10): 
+			activeSpawnPoint = defaultSpawnPoint
+			return
 	else:
-		var rand = rng.randi_range(0, viablePoints.size())
+		var rand = rng.randi_range(0, viablePoints.size()-1)
 		activeSpawnPoint = spawnPoints[rand]
 
 func spawnAtPoint():
-	var a = 0
+	var newPos = activeSpawnPoint.global_position
+	newPos.y = currentLocation.y
+	global_position = newPos
 
 func _sound_call(sound: float):
 	aggression += (sound * difficulty)
