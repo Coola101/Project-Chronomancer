@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdxtib2g826bu"
-path.s3tc="res://.godot/imported/Wall_Concept_Wood.png-c0bbfa632129c034498c8f191cefe74d.s3tc.ctex"
+path="res://.godot/imported/Wall_Concept_Wood.png-c0bbfa632129c034498c8f191cefe74d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/Sprites/Wall_Concept_Wood.png"
-dest_files=["res://.godot/imported/Wall_Concept_Wood.png-c0bbfa632129c034498c8f191cefe74d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Concept_Wood.png-c0bbfa632129c034498c8f191cefe74d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

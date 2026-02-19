@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name PlayerCharacter
 
 
 const ACCELERATION: float = 0.5 # Speed which the player acccelerates
@@ -7,8 +8,35 @@ const SPRINT_SPEED: float = 9.5
 const SPRINT_ACCELERATION: float = 0.75
 #const JUMP_VELOCITY = 4.5
 
+var carrying_generator_fuel: bool = false # Tracks whether or not the player is carrying fuel
+
 @onready var pivot := $CameraPivot
 @onready var player_camera := $CameraPivot/Camera3D
+
+var state # Current state of the player
+var states # Library of all states the player can be in
+
+func _init() -> void:
+	states = {
+		"ground": GroundPlayerState
+		#"sprint": SprintPlayerState
+	}
+	change_state("ground")
+
+### Verifies a State exists and returns the State
+func get_state(state_name):
+	if states.has(state_name):
+		return states.get(state_name)
+
+func change_state(new_state: String):
+	var param = 0 # Parameter to be passed between states if needed
+	if state != null:
+		param = state.exit()
+		state.queue_free()
+	state = get_state(new_state).new()
+	state.setup(self, param)
+	state.name = "current_state"
+	add_child(state)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# This lets us "click" into the application during gameplay.
@@ -34,8 +62,6 @@ func _physics_process(delta: float) -> void:
 	#	velocity.y = JUMP_VELOCITY
 	
 	move(ACCELERATION)
-
-	
 
 	move_and_slide()
 

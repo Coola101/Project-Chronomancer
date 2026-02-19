@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://7cx2qp2bljiw"]
+
+[ext_resource type="Texture2D" uid="uid://dj1linp4k0bep" path="res://assets/Sprites/Fuel_Can_Concept.png" id="1_1rr0u"]
+[ext_resource type="Script" uid="uid://dsq5u6rgti4og" path="res://scripts/generator_fuel_pickup.gd" id="1_njkgx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ysh4t"]
+
+[node name="GeneratorFuelPickup" type="Area3D" groups=["Enemy", "generator_fuel"]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_njkgx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ysh4t")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0313
+billboard = 1
+shaded = true
+texture_filter = 2
+texture = ExtResource("1_1rr0u")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
