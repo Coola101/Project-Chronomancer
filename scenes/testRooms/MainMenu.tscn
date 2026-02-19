@@ -1,0 +1,241 @@
+[gd_scene load_steps=17 format=3 uid="uid://cpyxyyqotph3k"]
+
+[ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_isr54"]
+[ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/attemptatscuffening.png" id="2_g2csr"]
+[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="3_i4sey"]
+[ext_resource type="Script" uid="uid://tao0qwtw4y05" path="res://scripts/menu/MainMenu.gd" id="4_6q7l8"]
+[ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="4_fth05"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g2csr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4sey"]
+atlas = ExtResource("2_g2csr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fth05"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4sey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fth05"]
+atlas = ExtResource("3_i4sey")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6q7l8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fth05")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Environment" id="Environment_i4sey"]
+background_mode = 2
+ambient_light_color = Color(0.21568628, 0.21568628, 0.29411766, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.4
+tonemap_exposure = 2.0
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.15686275, 0.15686275, 0.21568628, 1)
+fog_light_energy = 0.0
+fog_density = 0.2
+fog_aerial_perspective = 1.0
+fog_height_density = 0.8
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.15686275, 0.15686275, 0.29411766, 1)
+volumetric_fog_emission = Color(0, 0, 0.019607844, 1)
+volumetric_fog_emission_energy = 0.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q7l8"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.76862746, 0.76862746, 0.8, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ue8w"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fth05"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.9843137, 0.85490197, 0.30980393, 0.9843137)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cre4h"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fth05"]
+modulate_color = Color(1, 1, 1, 0)
+draw_center = false
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_isr54")
+physics_material = SubResource("PhysicsMaterial_g2csr")
+cell_scale = 2.0
+collision_layer = 3
+collision_mask = 3
+collision_priority = 2.0
+data = {
+"cells": PackedInt32Array(65535, 65535, 3, 65535, 0, 3, 65535, 65534, 3, 65535, 65533, 3, 65535, 65532, 3, 65535, 65531, 3, 65535, 65530, 3, 65535, 65529, 3, 65534, 65535, 3, 65533, 65535, 3, 65532, 65535, 3, 65531, 65535, 3, 65535, 65528, 3, 65535, 65527, 3, 65535, 65526, 3, 0, 65529, 3, 1, 65529, 3, 2, 65529, 3, 3, 65529, 3, 4, 65529, 3, 65534, 65526, 3, 65533, 65526, 3, 65532, 65526, 3, 65531, 65526, 3, 65535, 65525, 3, 65535, 65524, 3, 0, 65524, 3, 1, 65524, 3, 2, 65524, 3, 65531, 65527, 3, 65533, 65527, 3, 65534, 65527, 3, 65532, 65527, 3, 65534, 65528, 3, 65534, 65529, 3, 65534, 65530, 3, 65534, 65531, 3, 65534, 65532, 3, 65534, 65533, 3, 65534, 65534, 3, 65533, 65534, 3, 65532, 65534, 3, 65531, 65534, 3, 65531, 0, 3, 65532, 0, 3, 65533, 0, 3, 65534, 0, 3, 65534, 1, 3, 65535, 1, 3, 0, 1, 3, 0, 0, 3, 0, 65535, 3, 0, 65534, 3, 0, 65533, 3, 0, 65532, 3, 0, 65531, 3, 0, 65530, 3, 1, 65530, 3, 2, 65530, 3, 3, 65530, 3, 4, 65530, 3, 0, 65528, 3, 1, 65528, 3, 2, 65528, 3, 3, 65528, 3, 4, 65528, 3, 0, 65525, 3, 0, 65526, 3, 0, 65527, 3, 1, 65525, 3, 2, 65525, 3, 2, 65523, 3, 1, 65523, 3, 0, 65523, 3, 65535, 65523, 3, 65534, 65523, 3, 65534, 65524, 3, 65534, 65525, 3, 65533, 65525, 3, 65532, 65525, 3, 65531, 65525, 3, 65530, 65525, 3, 65529, 65525, 3, 65529, 65526, 3, 65530, 65526, 3, 65530, 65527, 3, 65529, 65527, 3, 65528, 65525, 3, 65527, 65525, 3, 65526, 65525, 3, 65526, 65526, 3, 65527, 65526, 3, 65528, 65526, 3, 65528, 65527, 3, 65527, 65527, 3, 65526, 65527, 3, 131062, 65525, 2, 131063, 65525, 2, 131064, 65525, 2, 131065, 65525, 2, 131066, 65525, 2, 131067, 65525, 2, 131068, 65525, 2, 131069, 65525, 2, 131070, 65525, 2, 131070, 65524, 2, 131070, 65523, 2, 131071, 65523, 2, 65536, 65523, 2, 65537, 65523, 2, 65538, 65523, 2, 65538, 65525, 2, 65537, 65525, 2, 65536, 65525, 2, 65536, 65526, 2, 65536, 65527, 2, 65536, 65528, 2, 65537, 65528, 2, 65538, 65528, 2, 65539, 65528, 2, 65540, 65528, 2, 65540, 65530, 2, 65539, 65530, 2, 65538, 65530, 2, 65537, 65530, 2, 65536, 65530, 2, 65536, 65531, 2, 65536, 65532, 2, 65536, 65533, 2, 65536, 65534, 2, 65536, 65535, 2, 65536, 0, 2, 65536, 1, 2, 131070, 1, 2, 131070, 0, 2, 131069, 0, 2, 131068, 0, 2, 131067, 0, 2, 131067, 65534, 2, 131068, 65534, 2, 131069, 65534, 2, 131070, 65534, 2, 131070, 65533, 2, 131070, 65532, 2, 131070, 65531, 2, 131070, 65530, 2, 131070, 65529, 2, 131070, 65528, 2, 131070, 65527, 2, 131069, 65527, 2, 131068, 65527, 2, 131067, 65527, 2, 131066, 65527, 2, 131065, 65527, 2, 131064, 65527, 2, 131063, 65527, 2, 131062, 65527, 2, 196598, 65525, 2, 196599, 65525, 2, 196600, 65525, 2, 196601, 65525, 2, 196602, 65525, 2, 196603, 65525, 2, 196604, 65525, 2, 196605, 65525, 2, 196606, 65525, 2, 196606, 65523, 2, 196606, 65524, 2, 196607, 65523, 2, 131072, 65523, 2, 131073, 65523, 2, 131074, 65523, 2, 131072, 65525, 2, 131073, 65525, 2, 131074, 65525, 2, 131072, 65526, 2, 131072, 65527, 2, 131072, 65528, 2, 131073, 65528, 2, 131074, 65528, 2, 131075, 65528, 2, 131076, 65528, 2, 131076, 65530, 2, 131075, 65530, 2, 131074, 65530, 2, 131073, 65530, 2, 131072, 65530, 2, 131072, 65531, 2, 131072, 65532, 2, 131072, 65533, 2, 131072, 65534, 2, 131072, 65535, 2, 131072, 0, 2, 131072, 1, 2, 196606, 1, 2, 196606, 0, 2, 196605, 0, 2, 196604, 0, 2, 196603, 0, 2, 196603, 65534, 2, 196604, 65534, 2, 196605, 65534, 2, 196606, 65534, 2, 196606, 65533, 2, 196606, 65532, 2, 196606, 65531, 2, 196606, 65530, 2, 196606, 65529, 2, 196606, 65528, 2, 196606, 65527, 2, 196605, 65527, 2, 196604, 65527, 2, 196603, 65527, 2, 196602, 65527, 2, 196601, 65527, 2, 196600, 65527, 2, 196599, 65527, 2, 196598, 65527, 2, 196602, 65534, 2, 196601, 65534, 2, 196600, 65534, 2, 196599, 65534, 2, 196598, 65534, 2, 196597, 65534, 2, 196596, 65534, 2, 196595, 65534, 2, 196595, 65535, 2, 196595, 0, 2, 196595, 1, 2, 196595, 2, 2, 196595, 3, 2, 196597, 0, 2, 196597, 1, 2, 196597, 2, 2, 196597, 3, 2, 196598, 0, 2, 196599, 0, 2, 196600, 0, 2, 196601, 0, 2, 196602, 0, 2, 131065, 65534, 2, 131066, 65534, 2, 131064, 65534, 2, 131063, 65534, 2, 131062, 65534, 2, 131061, 65534, 2, 131060, 65534, 2, 131059, 65534, 2, 131059, 65535, 2, 131059, 0, 2, 131059, 1, 2, 131059, 2, 2, 131059, 3, 2, 131061, 3, 2, 131061, 2, 2, 131061, 1, 2, 131061, 0, 2, 131062, 0, 2, 131063, 0, 2, 131064, 0, 2, 131065, 0, 2, 131066, 0, 2, 65530, 65534, 3, 65530, 65535, 3, 65530, 0, 3, 65529, 0, 3, 65529, 65535, 3, 65529, 65534, 3, 65528, 65534, 3, 65527, 65534, 3, 65526, 65534, 3, 65525, 65534, 3, 65524, 65534, 3, 65523, 65534, 3, 65523, 65535, 3, 65523, 0, 3, 65523, 1, 3, 65523, 2, 3, 65523, 3, 3, 65525, 3, 3, 65525, 2, 3, 65525, 1, 3, 65525, 0, 3, 65526, 0, 3, 65527, 0, 3, 65528, 0, 3, 65528, 65535, 3, 65527, 65535, 3, 65526, 65535, 3, 65525, 65535, 3, 65524, 65535, 3, 65524, 0, 3, 65524, 1, 3, 65524, 2, 3, 65524, 3, 3)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7895652, 0.2193003, 0.5731442, -0.18091999, 0.9756406, -0.12407029, -0.5863914, -0.0057316646, 0.8100077, -0.05120015, 2.2064362, -1)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3582916, 2.4804797, -1.9845554)
+pixel_size = 0.0156
+billboard = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_fth05")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="AnimatedSprite3D"]
+light_color = Color(0.9959237, 0.97386616, 0.8526568, 1)
+omni_range = 4.8
+omni_attenuation = -0.2
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="AnimatedSprite3D"]
+light_color = Color(0.85775566, 0.75493324, 0.12471465, 1)
+omni_range = 8.0
+omni_attenuation = 0.8
+
+[node name="Monster" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71658325, 3.2591577, -14.9691105)
+pixel_size = 0.0313
+billboard = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_6q7l8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i4sey")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_6q7l8")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -300.0
+offset_right = 275.0
+offset_bottom = 300.0
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 75
+
+[node name="Button_Start" type="Button" parent="CanvasLayer"]
+offset_left = 25.0
+offset_top = 224.0
+offset_right = 300.0
+offset_bottom = 299.0
+tooltip_text = "Start"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("4_fth05")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_6q7l8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ue8w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fth05")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cre4h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_fth05")
+text = "Start"
+
+[node name="Button_Exit" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_vertical = 2
+tooltip_text = "Start"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("4_fth05")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_6q7l8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ue8w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fth05")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cre4h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_fth05")
+text = "Quit"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 537.0
+offset_bottom = 153.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -40.0
+offset_right = 639.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("4_fth05")
+theme_override_font_sizes/normal_font_size = 24
+text = "Press [F4] to toggle fullscreen"
+
+[connection signal="pressed" from="CanvasLayer/Button_Start" to="CanvasLayer" method="_on_button_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button_Exit" to="CanvasLayer" method="_on_button_exit_pressed"]

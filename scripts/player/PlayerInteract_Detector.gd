@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 					get_collider().do_interaction()
 					
 		#
-			
 				#get_collider.db.activate()
 		
 	else:
