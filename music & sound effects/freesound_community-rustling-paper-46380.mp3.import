@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dt25qpw48wu0a"
+path="res://.godot/imported/freesound_community-rustling-paper-46380.mp3-1b426aef54936e2ceb60f5bf0c87a245.mp3str"
+
+[deps]
+
+source_file="res://music & sound effects/freesound_community-rustling-paper-46380.mp3"
+dest_files=["res://.godot/imported/freesound_community-rustling-paper-46380.mp3-1b426aef54936e2ceb60f5bf0c87a245.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
