@@ -9,7 +9,9 @@ enum EnemyState {
 @onready var navigation = $NavigationAgent3D
 @onready var rayCast = $RayCast3D
 @onready var currentState = EnemyState.Idling
-@onready var aggression: float = 100
+@onready var stalkAggression: float = 0
+@onready var chaseAggression: float = 0
+@onready var timer: Timer = $Timer
 var Player: CollisionObject3D
 var stunCheck: bool
 var coolCheck: bool
@@ -18,13 +20,20 @@ var chaseCheck: bool
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
+	timer.autostart = false
+	timer.wait_time = 0.5
 	rayCast.exclude_parent = true;
+	currentLocation = global_transform.origin
+	idlePoint = currentLocation
 	await get_tree().create_timer(5).timeout
 	changeState(EnemyState.Stalking)
 
 var playerLocation: Vector3
-var rng = RandomNumberGenerator.new()
 var currentLocation: Vector3
+var idlePoint: Vector3
+
+var rng = RandomNumberGenerator.new()
+
 var activeSpawnPoint: Node3D
 var defaultSpawnPoint: Node3D
 
@@ -42,16 +51,15 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 const chaseSpeed: float = 7.5
 const stalkSpeed: float = 2.5
 const stalkRadius: float = 10
-const difficulty: float = 1
-const threshold: float = 100
+const difficulty: float = 1.5
+const STALK_THRESHOLD: float = 100
+const CHASE_THRESHOLD: float = 20
 const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
 const COOLDOWN_TIME: float = 10
 const CHASE_TIME: float = 180
 const AGGRESSION_INTERVAL: float = 60
 const SPAWN_DISTANCE: float = 30
-
-var aggressionTimer: float
 
 func _physics_process(delta):
 	currentLocation = global_transform.origin
@@ -64,36 +72,22 @@ func _physics_process(delta):
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
-			
-			#Look for player
-			if(checkVisibility()):
-				changeState(EnemyState.Chasing)
-				#Reduce aggression per interval until aggression is at 1/4
-			else:
-				print("HIT ", aggression)
-				aggressionTimer += delta
-				if(aggressionTimer >= AGGRESSION_INTERVAL):
-					aggressionTimer -= AGGRESSION_INTERVAL
-					aggression -= 1
-					if(aggression <= threshold/4):
-						changeState(EnemyState.Cooldown)
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
-			if(!chaseCheck):
-				chaseTimer()
+			
 			if(player_safe_zone):
 				changeState(EnemyState.Cooldown)
-			#Check if safe zone
 		EnemyState.Stunned:
 			velocity = Vector3(0,0,0)
 			if(!stunCheck):
 				stunDelay()
 		EnemyState.Cooldown:
-			aggression = 0
+			global_position = idlePoint
+			stalkAggression = 0
 			if(currentState == EnemyState.Chasing):
 				var a = 0
 				#play sound A
@@ -103,17 +97,10 @@ func _physics_process(delta):
 			if(!coolCheck):
 				coolDelay()
 		EnemyState.Idling:
-			aggressionTimer += delta
-			if(aggressionTimer >= AGGRESSION_INTERVAL):
-				aggressionTimer -= AGGRESSION_INTERVAL
-				_sound_call(1)
+			if(stalkAggression >= STALK_THRESHOLD):
+				changeState(EnemyState.Stalking)
 	#Check collision w/ player
 	#Deal damage
-
-func chaseTimer():
-	chaseCheck = true;
-	await get_tree().create_timer(CHASE_TIME).timeout
-	if(currentState == EnemyState.Chasing || currentState == EnemyState.Stunned): changeState(EnemyState.Cooldown)
 
 func stunDelay():
 	stunCheck = true
@@ -139,31 +126,34 @@ func checkVisibility() -> bool:
 		rayCast.force_raycast_update()
 		return !rayCast.is_colliding()
 	return false
-	
 
 func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
 			#emerge
-			#findSpawnPoint(1)
-			#spawnAtPoint()
-			aggressionTimer = 0
+			timer.start()
+			stalkAggression = 100 * difficulty
+			findSpawnPoint(1)
+			spawnAtPoint()
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
+			timer.start()
+			chaseAggression = 20 * difficulty
 			velocity = Vector3(0,0,0)
-			await get_tree().create_timer(0.5).timeout
 			#if(currentState == EnemyState.Stalking):
 				#Roar
 			#if(currentState == EnemyState.Stunned):
 				#Snarl
 		EnemyState.Stunned:
 			#Stun sound & animation
+			timer.stop()
 			stunCheck = false
 		EnemyState.Cooldown:
 			#retreat into wall
+			timer.stop()
 			coolCheck = false
 		EnemyState.Idling:
-			aggressionTimer = 0
+			timer.start()
 	currentState = newState
 
 func findSpawnPoint(mult: int):
@@ -187,6 +177,32 @@ func spawnAtPoint():
 	global_position = newPos
 
 func _sound_call(sound: float):
-	aggression += (sound * difficulty)
-	if(aggression >= threshold && currentState == EnemyState.Idling):
+	stalkAggression += (sound * difficulty)
+	if(stalkAggression >= STALK_THRESHOLD && currentState == EnemyState.Idling):
 		changeState(EnemyState.Stalking)
+	elif(currentState == EnemyState.Stalking && sound >= 10):
+		navigation.target_position = playerLocation
+
+func _on_timer_timeout():
+	print("Stalk: ", stalkAggression, " Chase: ", chaseAggression)
+	match(currentState):
+		EnemyState.Idling:
+			stalkAggression = stalkAggression + (difficulty)
+			if(stalkAggression >= STALK_THRESHOLD):
+				changeState(EnemyState.Stalking)
+		EnemyState.Stalking:
+			if(checkVisibility()):
+				chaseAggression = chaseAggression + (2*difficulty)
+			else:
+				stalkAggression = stalkAggression - (1/difficulty)
+				if(stalkAggression <= STALK_THRESHOLD/4):
+					changeState(EnemyState.Cooldown)
+			if(chaseAggression >= CHASE_THRESHOLD):
+				changeState(EnemyState.Chasing)
+		EnemyState.Chasing:
+			if(!checkVisibility()):
+				chaseAggression = chaseAggression - (2/difficulty)
+			else:
+				chaseAggression = chaseAggression - (1/difficulty)
+			if(chaseAggression <= CHASE_THRESHOLD/4):
+				changeState(EnemyState.Cooldown)

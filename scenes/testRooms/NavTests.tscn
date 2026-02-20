@@ -52,7 +52,7 @@ script = ExtResource("1_762s5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.677574, 2.999998, -10.001848)
 
 [node name="EnemyBody" parent="." instance=ExtResource("2_jougd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.61, 3.5, -4.383)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6099997, 3.5, 0.6170001)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_5v1nd")
