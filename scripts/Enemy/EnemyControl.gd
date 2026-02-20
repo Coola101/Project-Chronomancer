@@ -9,7 +9,7 @@ enum EnemyState {
 @onready var navigation = $NavigationAgent3D
 @onready var rayCast = $RayCast3D
 @onready var currentState = EnemyState.Idling
-@onready var aggression: float = 0
+@onready var aggression: float = 100
 var Player: CollisionObject3D
 var stunCheck: bool
 var coolCheck: bool
@@ -48,7 +48,7 @@ const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
 const COOLDOWN_TIME: float = 10
 const CHASE_TIME: float = 180
-const AGGRESSION_INTERVAL: float = 0.5
+const AGGRESSION_INTERVAL: float = 60
 const SPAWN_DISTANCE: float = 30
 
 var aggressionTimer: float
@@ -66,20 +66,17 @@ func _physics_process(delta):
 			move_and_slide()
 			
 			#Look for player
-			var EnemyToPlayer = playerLocation - currentLocation
-			if(abs(EnemyToPlayer.length()) <= MAX_DISTANCE):
-				rayCast.target_position = EnemyToPlayer
-				rayCast.force_raycast_update()
-				if(!rayCast.is_colliding()):
-					changeState(EnemyState.Chasing)
+			if(checkVisibility()):
+				changeState(EnemyState.Chasing)
 				#Reduce aggression per interval until aggression is at 1/4
-				else:
-					aggressionTimer += delta
-					if(aggressionTimer >= AGGRESSION_INTERVAL):
-						aggressionTimer -= AGGRESSION_INTERVAL
-						aggression -= 1
-						if(aggression <= threshold/4):
-							changeState(EnemyState.Cooldown)
+			else:
+				print("HIT ", aggression)
+				aggressionTimer += delta
+				if(aggressionTimer >= AGGRESSION_INTERVAL):
+					aggressionTimer -= AGGRESSION_INTERVAL
+					aggression -= 1
+					if(aggression <= threshold/4):
+						changeState(EnemyState.Cooldown)
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
@@ -96,6 +93,13 @@ func _physics_process(delta):
 			if(!stunCheck):
 				stunDelay()
 		EnemyState.Cooldown:
+			aggression = 0
+			if(currentState == EnemyState.Chasing):
+				var a = 0
+				#play sound A
+			else:
+				var a = 0
+				#Play sound B
 			if(!coolCheck):
 				coolDelay()
 		EnemyState.Idling:
@@ -127,13 +131,22 @@ func getNewStalkTarget() -> Vector3:
 	var z_pos = randf_range(playerLocation.z - stalkRadius, playerLocation.z + stalkRadius)
 	var target = Vector3(x_pos, playerLocation.y, z_pos)
 	return target
+
+func checkVisibility() -> bool:
+	var EnemyToPlayer = playerLocation - currentLocation
+	if(abs(EnemyToPlayer.length()) <= MAX_DISTANCE):
+		rayCast.target_position = EnemyToPlayer
+		rayCast.force_raycast_update()
+		return !rayCast.is_colliding()
+	return false
 	
+
 func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
 			#emerge
-			findSpawnPoint(1)
-			spawnAtPoint()
+			#findSpawnPoint(1)
+			#spawnAtPoint()
 			aggressionTimer = 0
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:

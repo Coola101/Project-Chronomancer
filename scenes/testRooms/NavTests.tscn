@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b13cdsocjpdpl"]
+[gd_scene load_steps=13 format=3 uid="uid://b13cdsocjpdpl"]
 
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_762s5"]
 [ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_ldeur"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dvmwvax6gany6" path="res://scenes/prefabs/EnemyTester.tscn" id="2_jougd"]
 [ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="5_v6jby"]
 [ext_resource type="PackedScene" uid="uid://crpmwhc04d3hg" path="res://scenes/prefabs/SpawnPoint.tscn" id="6_4qp8f"]
+[ext_resource type="Shader" uid="uid://7pakkbdumven" path="res://default.gdshader" id="6_oq6wr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5v1nd"]
 vertices = PackedVector3Array(14.25, 2.5, -11.25, 12.75, 2.5, -11.25, 12.75, 2.5, -9.75, 12.25, 2.5, 8.75, 8.75, 2.5, 8.75, 9.5, 2.5, 9.75, 12.5, 2.5, 9.5, 29.5, 2.5, -11.5, 28.25, 2.5, -11.25, 32.5, 2.5, -10.5, 36.75, 2.5, -10.25, 37.5, 2.5, -11.25, 12.75, 2.5, 8.25, 12.75, 2.5, 11.5, 19.5, 2.5, 10.5, 18.25, 2.5, 6.75, 8.25, 2.5, 16.75, 4.75, 2.5, 16.75, 4.75, 2.5, 17.5, 8.5, 2.5, 17.5, 5.75, 2.5, -9.25, 4.75, 2.5, -8.5, 12.5, 2.5, -8.5, 12.25, 2.5, -9.25, 8.75, 2.5, 16.25, 8.75, 2.5, 19.5, 9.75, 2.5, 18.75, 25.5, 2.5, 6.75, 24.75, 2.5, 6.75, 24.75, 2.5, 10.25, 35.5, 2.5, 12.75, 30.75, 2.5, 12.75, 31.5, 2.5, 13.75, 34.75, 2.5, 13.75, 21.5, 2.5, -22.25, 20.75, 2.5, -22.25, 20.75, 2.5, -11.75, 21.5, 2.5, -11.5, 33.5, 2.5, -10.25, 30.75, 2.5, 18.25, 31.5, 2.5, 18.5, 20.25, 2.5, -11.25, 23.75, 2.5, -5.25, 23.5, 2.5, -10.25, 30.25, 2.5, 18.75, 34.25, 2.5, 18.75, 35.5, 2.5, 19.5, 32.75, 2.5, -5.75, 33.5, 2.5, -5.5, 28.75, 2.5, -23.75, 28.75, 2.5, -22.25, 29.5, 2.5, -29.25, 32.25, 2.5, -5.25, 36.25, 2.5, -5.25, 32.5, 2.5, -4.5, 33.5, 2.5, -4.25, 37.5, 2.5, -4.5, 24.25, 2.5, 18.75, 32.25, 2.5, 2.75, 30.75, 2.5, 2.75, 30.75, 2.5, 7.5, 35.5, 2.5, 7.5, 35.5, 2.5, 2.75, 33.5, 2.5, 2.5, 34.75, 2.5, 18.25, 12.75, 2.5, -29.25, 13.5, 2.5, -28.25, 28.5, 2.5, -28.5, 12.75, 2.5, -0.5, 18.75, 2.5, -0.25, 19.5, 2.5, -0.25, 32.75, 2.5, 2.25, 12.75, 2.5, 6.75, 28.75, 2.5, -11.75, 24.75, 2.5, 18.25, 25.5, 2.5, 18.5, 13.5, 2.5, -22.25, 13.75, 2.5, -23.25, 12.75, 2.5, -19.75, 23.5, 2.5, -0.5, 23.75, 2.5, -4.5, 24.5, 2.5, 11.5, 24.25, 2.5, 10.75, 5.5, 2.5, -18.25, 4.75, 2.5, -19.25, 36.75, 2.5, -5.75, 18.75, 2.5, 6.25, 12.25, 2.5, -19.25, 14.5, 2.5, -18.5, 13.5, 2.5, -19.5, 15.25, 2.5, -19.25, 15.25, 2.5, -11.5, 14.75, 2.5, -11.75, 28.25, 2.5, -23.25)
@@ -18,17 +19,26 @@ agent_radius = 0.4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_762s5"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_saj56"]
+shader = ExtResource("6_oq6wr")
+
+[sub_resource type="Sky" id="Sky_4qp8f"]
+sky_material = SubResource("ShaderMaterial_saj56")
+
 [sub_resource type="Environment" id="Environment_v6jby"]
-background_mode = 2
+background_color = Color(0.27982885, 0.069464944, 0.95175165, 1)
+background_energy_multiplier = 16.0
+background_canvas_max_layer = 2
+sky = SubResource("Sky_4qp8f")
 ambient_light_color = Color(0.21568628, 0.21568628, 0.29411766, 1)
 ambient_light_sky_contribution = 0.5
 ambient_light_energy = 0.4
 tonemap_exposure = 2.0
 ssao_enabled = true
+fog_enabled = true
 fog_light_color = Color(0.15686275, 0.15686275, 0.21568628, 1)
 fog_light_energy = 0.0
 fog_density = 0.2
-fog_aerial_perspective = 1.0
 fog_height_density = 0.8
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.15686275, 0.15686275, 0.29411766, 1)
@@ -42,7 +52,7 @@ script = ExtResource("1_762s5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.677574, 2.999998, -10.001848)
 
 [node name="EnemyBody" parent="." instance=ExtResource("2_jougd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6098022, 3, -3.3827143)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.61, 3.5, -4.383)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_5v1nd")
@@ -88,10 +98,10 @@ environment = SubResource("Environment_v6jby")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 
 [node name="SpawnPoint" parent="SpawnPointHolder" instance=ExtResource("6_4qp8f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10.346134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -6.346134)
 
 [node name="SpawnPoint2" parent="SpawnPointHolder" instance=ExtResource("6_4qp8f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 5)
 
 [node name="SpawnPoint3" parent="SpawnPointHolder" instance=ExtResource("6_4qp8f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.73645, 0, 10.43692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.73645, 0, 9.43692)

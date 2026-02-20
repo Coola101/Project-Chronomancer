@@ -15,5 +15,4 @@ func _physics_process(delta):
 
 func loadSpawnPoints():
 	for poi in $SpawnPointHolder.get_children():
-		print(poi)
 		spawnPoints.append(poi)
