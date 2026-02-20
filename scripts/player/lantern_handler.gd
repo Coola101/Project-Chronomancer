@@ -10,6 +10,8 @@ func _physics_process(delta: float) -> void:
 	rotation.y = lerp_angle(rotation.y, cameraPivot.rotation.y, delta*3)
 	rotation.x = lerp_angle(rotation.x, cameraPivot.get_child(0).rotation.x/3, delta)
 	
+	
+	
 
 @export var variance: float = 0
 @export var flicker_speed: float = 1.0
