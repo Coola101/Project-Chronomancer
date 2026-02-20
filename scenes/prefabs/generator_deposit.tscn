@@ -88,7 +88,7 @@ shape = SubResource("BoxShape3D_ysh4t")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0313
-billboard = 1
+billboard = 2
 shaded = true
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_hcthi")

@@ -1,9 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=9 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
+[ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/attemptatscuffening.png" id="3_5h5gp"]
+[ext_resource type="Script" uid="uid://bgce8tldwahj1" path="res://scripts/player/lantern_handler.gd" id="3_rfbh5"]
+[ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="5_jyw7g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfbh5"]
+atlas = ExtResource("3_5h5gp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jyw7g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfbh5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 script = ExtResource("1_xewlb")
@@ -22,12 +40,29 @@ collision_mask = 8
 collide_with_areas = true
 script = ExtResource("2_htlai")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CameraPivot"]
+[node name="LanternPivot" type="Node3D" parent="."]
+script = ExtResource("3_rfbh5")
+variance = 0.013
+flicker_speed = 0.01
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="LanternPivot"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.9253679, 0.2714401, -1)
+pixel_size = 0.0156
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_jyw7g")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LanternPivot/AnimatedSprite3D"]
 light_color = Color(0.9959237, 0.97386616, 0.8526568, 1)
 omni_range = 4.8
 omni_attenuation = -0.2
+script = ExtResource("5_jyw7g")
+variance = 0.15
+flicker_speed = 1.2
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="CameraPivot"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="LanternPivot/AnimatedSprite3D"]
 light_color = Color(0.85775566, 0.75493324, 0.12471465, 1)
 omni_range = 8.0
 omni_attenuation = 0.8
+script = ExtResource("5_jyw7g")
+variance = 0.8
+flicker_speed = 1.8
