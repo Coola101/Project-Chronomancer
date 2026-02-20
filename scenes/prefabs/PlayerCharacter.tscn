@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="5_jyw7g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
-radius = 0.6
+radius = 0.7
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rfbh5"]
 atlas = ExtResource("3_5h5gp")
@@ -47,7 +47,7 @@ variance = 0.013
 flicker_speed = 0.01
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="LanternPivot"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.28487396, 0.34941125, -0.44454736)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.37660527, 0.34941125, -0.4742859)
 pixel_size = 0.0078
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_jyw7g")
