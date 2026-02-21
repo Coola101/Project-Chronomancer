@@ -48,15 +48,15 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 	defaultSpawnPoint = allPoints[0]
 	spawnPoints = allPoints
 
-const chaseSpeed: float = 7.5
-const stalkSpeed: float = 2.5
+const chaseSpeed: float = 8
+const stalkSpeed: float = 4
 const STALK_RADIUS: float = 10
 const difficulty: float = 3
-const STALK_THRESHOLD: float = 100
+const STALK_THRESHOLD: float = 200
 const CHASE_THRESHOLD: float = 20
 const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
-const COOLDOWN_TIME: float = 10
+const COOLDOWN_TIME: float = 30
 const CHASE_TIME: float = 180
 const AGGRESSION_INTERVAL: float = 60
 const SPAWN_DISTANCE: float = 30
@@ -69,8 +69,6 @@ func _physics_process(delta):
 				navigation.target_position = getNewStalkTarget()
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
-			var distance = navigation.distance_to_target()
-			#print(distance)
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
@@ -137,7 +135,7 @@ func changeState(newState: EnemyState):
 		EnemyState.Stalking:
 			#emerge
 			timer.start()
-			stalkAggression = 100 * difficulty
+			stalkAggression = 75 * difficulty
 			findSpawnPoint(1)
 			spawnAtPoint()
 			navigation.target_position = getNewStalkTarget()
@@ -196,7 +194,7 @@ func _on_timer_timeout():
 	print("Stalk: ", stalkAggression, " Chase: ", chaseAggression)
 	match(currentState):
 		EnemyState.Idling:
-			stalkAggression = stalkAggression + (difficulty)
+			stalkAggression = stalkAggression + (difficulty/3)
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
 		EnemyState.Stalking:

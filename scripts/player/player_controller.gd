@@ -3,8 +3,8 @@ class_name PlayerCharacter
 
 
 const ACCELERATION: float = 0.5 # Speed which the player acccelerates
-const MAX_SPEED: float = 6.5 # Top walking speed for the player
-const SPRINT_SPEED: float = 9.5
+const MAX_SPEED: float = 6 # Top walking speed for the player
+const SPRINT_SPEED: float = 8.5
 const SPRINT_ACCELERATION: float = 0.75
 #const JUMP_VELOCITY = 4.5
 
@@ -93,6 +93,8 @@ func move(speed: float) -> void:
 	else:
 		if(carrying_generator_fuel):
 			currentSound = 1
+		else:
+			currentSound = 0
 		speed_cap = MAX_SPEED
 	
 	#Temporarily, the speed capping is placed here. Later it will likely be tied to a grounded state.

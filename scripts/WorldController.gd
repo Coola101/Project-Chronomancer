@@ -12,7 +12,7 @@ func _ready():
 	loadSpawnPoints()
 	get_tree().call_group("Enemy", "initalize_spawn_points", spawnPoints)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_tree().call_group("Enemy", "update_target_location", player.global_transform.origin)
 
 func loadSpawnPoints():
@@ -22,6 +22,7 @@ func loadSpawnPoints():
 
 func _on_sound_timer_timeout() -> void:
 	if(player.get_sound_level() > 0):
+		print(player.get_sound_level())
 		get_tree().call_group("Enemy", "_sound_call", player.get_sound_level())
 
 func sound_event(sound: float):
