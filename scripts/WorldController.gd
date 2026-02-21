@@ -1,6 +1,8 @@
 extends Node
 
 @onready var player = $PlayerCharacter
+@onready var enemy = $EnemyBody
+@onready var soundTimer = $SoundTimer
 
 var spawnPoints: Array[Node3D]
 
@@ -16,3 +18,8 @@ func _physics_process(delta):
 func loadSpawnPoints():
 	for poi in $SpawnPointHolder.get_children():
 		spawnPoints.append(poi)
+
+
+func _on_sound_timer_timeout() -> void:
+	if(player.get_sound_level() > 0):
+		get_tree().call_group("Enemy", "_sound_call", player.get_sound_level())

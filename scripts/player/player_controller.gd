@@ -16,6 +16,10 @@ var carrying_generator_fuel: bool = false # Tracks whether or not the player is 
 var state # Current state of the player
 var states # Library of all states the player can be in
 
+var currentSound: float = 0
+func get_sound_level() -> float:
+	return currentSound
+
 func _init() -> void:
 	states = {
 		"ground": GroundPlayerState
@@ -81,8 +85,14 @@ func move(speed: float) -> void:
 	var speed_cap: float
 	if Input.is_action_pressed("sprint"):
 		speed_cap = SPRINT_SPEED
+		if(carrying_generator_fuel):
+			currentSound = 10
+		else:
+			currentSound = 5	
 		# TODO:  Add call to recognize sound from sprint once added
 	else:
+		if(carrying_generator_fuel):
+			currentSound = 1
 		speed_cap = MAX_SPEED
 	
 	#Temporarily, the speed capping is placed here. Later it will likely be tied to a grounded state.

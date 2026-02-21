@@ -50,7 +50,7 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 
 const chaseSpeed: float = 7.5
 const stalkSpeed: float = 2.5
-const stalkRadius: float = 10
+const STALK_RADIUS: float = 10
 const difficulty: float = 1.5
 const STALK_THRESHOLD: float = 100
 const CHASE_THRESHOLD: float = 20
@@ -67,8 +67,10 @@ func _physics_process(delta):
 		EnemyState.Stalking:
 			if(navigation.is_target_reached() || !navigation.is_target_reachable()):
 				navigation.target_position = getNewStalkTarget()
-				#$Target.position = navigation.target_position
+				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
+			var distance = navigation.distance_to_target()
+			print(distance)
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
@@ -116,8 +118,9 @@ func coolDelay():
 		changeState(EnemyState.Idling)
 
 func getNewStalkTarget() -> Vector3:
-	var x_pos = randf_range(playerLocation.x - stalkRadius, playerLocation.x + stalkRadius)
-	var z_pos = randf_range(playerLocation.z - stalkRadius, playerLocation.z + stalkRadius)
+	var stalkDist = STALK_RADIUS / chaseAggression
+	var x_pos = randf_range(playerLocation.x - stalkDist, playerLocation.x + stalkDist)
+	var z_pos = randf_range(playerLocation.z - stalkDist, playerLocation.z + stalkDist)
 	var target = Vector3(x_pos, playerLocation.y, z_pos)
 	return target
 
@@ -168,7 +171,6 @@ func findSpawnPoint(mult: int):
 		findSpawnPoint(mult+1)
 		if(mult >= 10): 
 			activeSpawnPoint = defaultSpawnPoint
-			return
 	else:
 		var rand = rng.randi_range(0, viablePoints.size()-1)
 		activeSpawnPoint = spawnPoints[rand]
@@ -179,11 +181,16 @@ func spawnAtPoint():
 	global_position = newPos
 
 func _sound_call(sound: float):
-	stalkAggression += (sound * difficulty)
-	if(stalkAggression >= STALK_THRESHOLD && currentState == EnemyState.Idling):
-		changeState(EnemyState.Stalking)
-	elif(currentState == EnemyState.Stalking && sound >= 10):
-		navigation.target_position = playerLocation
+	match(currentState):
+		EnemyState.Idling:
+			stalkAggression += (sound * difficulty)
+			if(stalkAggression >= STALK_THRESHOLD):
+				changeState(EnemyState.Stalking)
+		EnemyState.Stalking:
+			if(chaseAggression <= CHASE_THRESHOLD/2):
+				chaseAggression += (sound * difficulty)/2
+			if(sound >= 30/difficulty):
+				navigation.target_position = playerLocation
 
 func _on_timer_timeout():
 	print("Stalk: ", stalkAggression, " Chase: ", chaseAggression)
