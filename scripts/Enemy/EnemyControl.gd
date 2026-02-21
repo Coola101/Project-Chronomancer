@@ -51,7 +51,7 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 const chaseSpeed: float = 7.5
 const stalkSpeed: float = 2.5
 const STALK_RADIUS: float = 10
-const difficulty: float = 1.5
+const difficulty: float = 3
 const STALK_THRESHOLD: float = 100
 const CHASE_THRESHOLD: float = 20
 const MAX_DISTANCE: float = 20
@@ -70,7 +70,7 @@ func _physics_process(delta):
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var distance = navigation.distance_to_target()
-			print(distance)
+			#print(distance)
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
@@ -203,15 +203,16 @@ func _on_timer_timeout():
 			if(checkVisibility()):
 				chaseAggression = chaseAggression + (2*difficulty)
 			else:
-				stalkAggression = stalkAggression - (1/difficulty)
+				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
 				if(stalkAggression <= STALK_THRESHOLD/4):
 					changeState(EnemyState.Cooldown)
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
 			if(!checkVisibility()):
-				chaseAggression = chaseAggression - (2/difficulty)
+				chaseAggression = chaseAggression - snappedf(2/difficulty, 0.1)
 			else:
-				chaseAggression = chaseAggression - (1/difficulty)
-			if(chaseAggression <= CHASE_THRESHOLD/4):
+				chaseAggression = chaseAggression - snappedf(1/difficulty, 0.1)
+			if(chaseAggression <= 0):
+				chaseAggression = 0
 				changeState(EnemyState.Cooldown)

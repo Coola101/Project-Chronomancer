@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://4oagl7iagj7y"]
+[gd_scene load_steps=14 format=3 uid="uid://4oagl7iagj7y"]
 
 [ext_resource type="Texture2D" uid="uid://05qcgv433lp8" path="res://assets/Sprites/wood_concept_2.png" id="1_oaokr"]
-[ext_resource type="Texture2D" uid="uid://bcby3orfemj1l" path="res://assets/Sprites/Wall_Concept_Brick.png" id="2_oaokr"]
+[ext_resource type="Texture2D" uid="uid://cuxbfs2s1c3to" path="res://assets/Sprites/snowy_bricks.png" id="2_yffsq"]
+[ext_resource type="Texture2D" uid="uid://brubmruluw0oi" path="res://assets/Sprites/snow.png" id="3_yffsq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6b8q"]
 
@@ -17,7 +18,7 @@ size = Vector3(0.05, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yffsq"]
 albedo_color = Color(0.83889705, 0.83889705, 0.838897, 1)
-albedo_texture = ExtResource("2_oaokr")
+albedo_texture = ExtResource("2_yffsq")
 normal_scale = 16.0
 uv1_scale = Vector3(3, 2, 2)
 texture_filter = 0
@@ -30,6 +31,15 @@ material = SubResource("StandardMaterial3D_yffsq")
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yffsq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yvl76"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvdpn"]
+albedo_color = Color(0.83033526, 0.83033514, 0.83033514, 1)
+albedo_texture = ExtResource("3_yffsq")
+uv1_scale = Vector3(3, 2, 2)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yvl76"]
+material = SubResource("StandardMaterial3D_pvdpn")
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -71,4 +81,16 @@ collision_priority = 2.0
 physics_material_override = SubResource("PhysicsMaterial_yffsq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_yvl76")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = SubResource("BoxMesh_yvl76")
+skeleton = NodePath("../Floor")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+collision_priority = 2.0
+physics_material_override = SubResource("PhysicsMaterial_yffsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
 shape = SubResource("BoxShape3D_yvl76")

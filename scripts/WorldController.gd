@@ -23,3 +23,6 @@ func loadSpawnPoints():
 func _on_sound_timer_timeout() -> void:
 	if(player.get_sound_level() > 0):
 		get_tree().call_group("Enemy", "_sound_call", player.get_sound_level())
+
+func sound_event(sound: float):
+	get_tree().call_group("Enemy", "_sound_call", sound)
