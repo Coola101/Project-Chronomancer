@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_762s5"]
 [ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_ldeur"]
 [ext_resource type="PackedScene" uid="uid://colqt1a2lsves" path="res://scenes/prefabs/PlayerCharacter.tscn" id="1_pmr8a"]
-[ext_resource type="PackedScene" uid="uid://dvmwvax6gany6" path="res://scenes/prefabs/EnemyTester.tscn" id="2_jougd"]
+[ext_resource type="PackedScene" uid="uid://dvmwvax6gany6" path="res://scenes/prefabs/Enemy.tscn" id="2_jougd"]
 [ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="5_v6jby"]
 [ext_resource type="PackedScene" uid="uid://crpmwhc04d3hg" path="res://scenes/prefabs/SpawnPoint.tscn" id="6_4qp8f"]
 [ext_resource type="Shader" uid="uid://7pakkbdumven" path="res://default.gdshader" id="6_oq6wr"]

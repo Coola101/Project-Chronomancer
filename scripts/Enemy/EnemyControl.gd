@@ -99,6 +99,8 @@ func _physics_process(delta):
 		EnemyState.Idling:
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
+				
+	
 	#Check collision w/ player
 	#Deal damage
 
