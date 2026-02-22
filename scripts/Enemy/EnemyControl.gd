@@ -14,6 +14,7 @@ enum EnemyState {
 @onready var timer: Timer = $AggressionTimer
 @onready var dmgTImer: Timer = $DamageTimer
 @onready var player = get_tree().get_root().get_child(0).get_node("PlayerCharacter")
+@onready var anim: AnimatedSprite3D = $EnemySprite
 var Player: CollisionObject3D
 var stunCheck: bool
 var coolCheck: bool
@@ -137,7 +138,8 @@ func checkVisibility() -> bool:
 func changeState(newState: EnemyState):
 	match newState:
 		EnemyState.Stalking:
-			#emerge
+			anim.play()
+			anim.speed_scale = 0.5
 			timer.start()
 			stalkAggression = 75 * difficulty
 			findSpawnPoint(1)
@@ -145,6 +147,8 @@ func changeState(newState: EnemyState):
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
 			timer.start()
+			anim.play()
+			anim.speed_scale = 1
 			chaseAggression = 20 * difficulty
 			velocity = Vector3(0,0,0)
 			#if(currentState == EnemyState.Stalking):
@@ -153,10 +157,11 @@ func changeState(newState: EnemyState):
 				#Snarl
 		EnemyState.Stunned:
 			#Stun sound & animation
+			anim.pause()
 			timer.stop()
 			stunCheck = false
 		EnemyState.Cooldown:
-			#retreat into wall
+			anim.pause()
 			global_position = idlePoint
 			if(playerHealth <= 10): playerHealth += 1
 			timer.stop()
@@ -164,6 +169,8 @@ func changeState(newState: EnemyState):
 		EnemyState.Idling:
 			timer.start()
 		EnemyState.Ending:
+			anim.play()
+			anim.speed_scale = 1.5
 			var newPos = defaultSpawnPoint.global_position
 			newPos.y = currentLocation.y
 			global_position = newPos

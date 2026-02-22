@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm6dt13vr8q6d"
-path.s3tc="res://.godot/imported/NoteClose.png-ae25b9a4499f9761c9fb810fa52e398e.s3tc.ctex"
+uid="uid://c6mce8q6mygsc"
+path.s3tc="res://.godot/imported/moon.png-adb88428bda618bcc27e2d5df3ef886f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/Sprites/NoteClose.png"
-dest_files=["res://.godot/imported/NoteClose.png-ae25b9a4499f9761c9fb810fa52e398e.s3tc.ctex"]
+source_file="res://assets/Sprites/moon.png"
+dest_files=["res://.godot/imported/moon.png-adb88428bda618bcc27e2d5df3ef886f.s3tc.ctex"]
 
 [params]
 

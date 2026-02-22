@@ -1,12 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvmwvax6gany6"]
+[gd_scene load_steps=13 format=3 uid="uid://dvmwvax6gany6"]
 
 [ext_resource type="Script" uid="uid://b0rsqdmewj2pk" path="res://scripts/Enemy/EnemyControl.gd" id="1_0kupw"]
-[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="2_h72rr"]
+[ext_resource type="Texture2D" uid="uid://dwobegp06kyte" path="res://assets/Sprites/guy_anim-Sheet.png" id="2_cykpr"]
 [ext_resource type="Texture2D" uid="uid://b6l4lw6pf8uan" path="res://assets/Sprites/guy_eyes.png" id="3_cykpr"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_h72rr"]
 height = 1.0
 radius = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36far"]
+atlas = ExtResource("2_cykpr")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qxfn"]
+atlas = ExtResource("2_cykpr")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k405x"]
+atlas = ExtResource("2_cykpr")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cceew"]
+atlas = ExtResource("2_cykpr")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irdb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36far")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qxfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k405x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cceew")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc36q"]
 albedo_color = Color(1, 0.13999999, 0.13999999, 1)
@@ -34,12 +70,12 @@ path_height_offset = -1.0
 simplify_path = true
 radius = 0.6
 
-[node name="EnemySprite" type="Sprite3D" parent="."]
+[node name="EnemySprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0313
 billboard = 2
 shaded = true
 texture_filter = 0
-texture = ExtResource("2_h72rr")
+sprite_frames = SubResource("SpriteFrames_irdb3")
 
 [node name="Sprite3D" type="Sprite3D" parent="EnemySprite"]
 pixel_size = 0.05

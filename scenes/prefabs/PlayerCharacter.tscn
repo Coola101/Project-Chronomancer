@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=19 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="5_3y507"]
 [ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="5_jyw7g"]
 [ext_resource type="Script" uid="uid://4ik52wdtudun" path="res://scripts/MenuLanternAnimator.gd" id="6_rgfg6"]
+[ext_resource type="AudioStream" uid="uid://bwjtujdb6ehhp" path="res://assets/music & sound effects/Snowfootsteps - Made with Clipchamp.mp3" id="8_cinro"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
 radius = 0.7
@@ -127,3 +128,13 @@ omni_attenuation = 0.8
 script = ExtResource("5_jyw7g")
 variance = 0.8
 flicker_speed = 1.8
+
+[node name="FootstepPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_cinro")
+volume_db = -17.0
+pitch_scale = 2.0
+parameters/looping = true
+
+[node name="MusicListener" type="AudioStreamPlayer" parent="."]
+
+[node name="EffectPlayer" type="AudioStreamPlayer" parent="."]

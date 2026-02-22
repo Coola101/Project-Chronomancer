@@ -12,10 +12,12 @@ var carrying_generator_fuel: bool = false # Tracks whether or not the player is 
 
 @onready var pivot := $CameraPivot
 @onready var player_camera := $CameraPivot/Camera3D
+@onready var footStep := $FootstepPlayer
 
 var state # Current state of the player
 var states # Library of all states the player can be in
 
+var moving: bool
 var currentSound: float = 0
 func get_sound_level() -> float:
 	return currentSound
@@ -75,6 +77,7 @@ func move(speed: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		moving = true
 		velocity.x += direction.x * speed
 		velocity.z += direction.z * speed
 	else:
@@ -96,9 +99,20 @@ func move(speed: float) -> void:
 		else:
 			currentSound = 0
 		speed_cap = MAX_SPEED
+	#if(moving && !footStep.playing):
+		#footStepSound()
+	#elif(!moving):
+		#footStep.stop()
 	
 	#Temporarily, the speed capping is placed here. Later it will likely be tied to a grounded state.
 	if ((velocity.x*velocity.x)+(velocity.z*velocity.z) > speed_cap):
 		velocity.x = speed_cap * direction.x
 		velocity.z = speed_cap * direction.z
 		
+
+func footStepSound():
+	footStep.play()
+	if(currentSound > 1):
+		footStep.pitch_scale = 1.5
+	else:
+		footStep.pitch_scale = 0.75
