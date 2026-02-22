@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Project-Chronomancer"
+config/name="COLD SNAP"
 run/main_scene="uid://cpyxyyqotph3k"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dt0um6wg57b0h"
 
 [display]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://cpyxyyqotph3k"]
 
 [ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_isr54"]
-[ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/attemptatscuffening.png" id="2_g2csr"]
+[ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/lantern.png" id="2_g2csr"]
 [ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="3_1ue8w"]
 [ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="3_i4sey"]
 [ext_resource type="Script" uid="uid://tao0qwtw4y05" path="res://scripts/menu/MainMenu.gd" id="4_6q7l8"]
