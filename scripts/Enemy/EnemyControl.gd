@@ -259,6 +259,9 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _initate_endgame(bad_end: bool):
 	#play special sound
-	if(bad_end): player.get_node("LanternPivot").hide()
+	if(bad_end): 
+		player.get_node("LanternPivot").hide()
+		findSpawnPoint(1)
+		spawnAtPoint()
 	await get_tree().create_timer(3).timeout
 	changeState(EnemyState.Ending)

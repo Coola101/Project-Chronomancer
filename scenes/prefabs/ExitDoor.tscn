@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbaag7v2wd2sv"]
 
-[ext_resource type="Texture2D" uid="uid://bm6dt13vr8q6d" path="res://assets/Sprites/NoteClose.png" id="1_ragvh"]
+[ext_resource type="Texture2D" uid="uid://b4g6r4p8cesus" path="res://assets/Sprites/door.png" id="1_ragvh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kumri"]
+size = Vector3(1, 1, 0.34869385)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mw21i"]
-size = Vector3(0.8, 1, 0.8)
+size = Vector3(0.8, 1, 0.24956053)
 
 [node name="ExitDoor" type="Area3D"]
+transform = Transform3D(-5, 0, -4.371139e-07, 0, 5, 0, 4.371139e-07, 0, -5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 2.220446e-16, 0, -0.016998291)
 shape = SubResource("BoxShape3D_kumri")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-pixel_size = 0.005
 shaded = true
 texture_filter = 2
 texture = ExtResource("1_ragvh")
@@ -21,4 +23,5 @@ texture = ExtResource("1_ragvh")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 2.553513e-15, 0, -0.017846717)
 shape = SubResource("BoxShape3D_mw21i")
