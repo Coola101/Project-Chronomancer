@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=18 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
 [ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/lantern.png" id="3_5h5gp"]
 [ext_resource type="Script" uid="uid://bgce8tldwahj1" path="res://scripts/player/lantern_handler.gd" id="3_rfbh5"]
+[ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="5_3y507"]
 [ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="5_jyw7g"]
+[ext_resource type="Script" uid="uid://4ik52wdtudun" path="res://scripts/MenuLanternAnimator.gd" id="6_rgfg6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
 radius = 0.7
@@ -12,6 +14,34 @@ radius = 0.7
 [sub_resource type="AtlasTexture" id="AtlasTexture_rfbh5"]
 atlas = ExtResource("3_5h5gp")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgfg6"]
+atlas = ExtResource("5_3y507")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cinro"]
+atlas = ExtResource("5_3y507")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1ldx"]
+atlas = ExtResource("5_3y507")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dym3"]
+atlas = ExtResource("5_3y507")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu41t"]
+atlas = ExtResource("5_3y507")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3tkr"]
+atlas = ExtResource("5_3y507")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4khfg"]
+atlas = ExtResource("5_3y507")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jyw7g"]
 animations = [{
@@ -21,6 +51,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgfg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cinro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1ldx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dym3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu41t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3tkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4khfg")
+}],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -52,6 +108,9 @@ pixel_size = 0.0078
 texture_filter = 2
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_jyw7g")
+animation = &"new_animation"
+speed_scale = 0.3
+script = ExtResource("6_rgfg6")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="LanternPivot/AnimatedSprite3D"]
 light_color = Color(0.9959237, 0.97386616, 0.8526568, 1)

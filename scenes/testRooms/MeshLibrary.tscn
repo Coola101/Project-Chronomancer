@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://4oagl7iagj7y"]
+[gd_scene load_steps=20 format=3 uid="uid://4oagl7iagj7y"]
 
 [ext_resource type="Texture2D" uid="uid://05qcgv433lp8" path="res://assets/Sprites/wood_concept_2.png" id="1_oaokr"]
 [ext_resource type="Texture2D" uid="uid://cuxbfs2s1c3to" path="res://assets/Sprites/snowy_bricks.png" id="2_yffsq"]
 [ext_resource type="Texture2D" uid="uid://brubmruluw0oi" path="res://assets/Sprites/snow.png" id="3_yffsq"]
+[ext_resource type="Texture2D" uid="uid://bpbpyvji58hth" path="res://assets/Sprites/snowy_bricks_top.png" id="4_yvl76"]
+[ext_resource type="Texture2D" uid="uid://brc5ing27d8c0" path="res://assets/Sprites/snowy_bricks_side.png" id="5_ow325"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6b8q"]
 
@@ -40,6 +42,30 @@ texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_yvl76"]
 material = SubResource("StandardMaterial3D_pvdpn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50nwr"]
+albedo_color = Color(0.83889705, 0.83889705, 0.838897, 1)
+albedo_texture = ExtResource("4_yvl76")
+normal_scale = 16.0
+uv1_scale = Vector3(3, 2, 2)
+texture_filter = 0
+stencil_flags = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_bodce"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_50nwr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8582"]
+albedo_color = Color(0.83889705, 0.83889705, 0.838897, 1)
+albedo_texture = ExtResource("5_ow325")
+normal_scale = 16.0
+uv1_scale = Vector3(3, 2, 2)
+texture_filter = 0
+stencil_flags = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_pvbt0"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_u8582")
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -93,4 +119,26 @@ collision_priority = 2.0
 physics_material_override = SubResource("PhysicsMaterial_yffsq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+shape = SubResource("BoxShape3D_yvl76")
+
+[node name="Floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+mesh = SubResource("BoxMesh_bodce")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+collision_priority = 2.0
+physics_material_override = SubResource("PhysicsMaterial_yffsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+shape = SubResource("BoxShape3D_yvl76")
+
+[node name="Floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+mesh = SubResource("BoxMesh_pvbt0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor4"]
+collision_priority = 2.0
+physics_material_override = SubResource("PhysicsMaterial_yffsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D"]
 shape = SubResource("BoxShape3D_yvl76")
