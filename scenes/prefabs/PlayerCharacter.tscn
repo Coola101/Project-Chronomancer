@@ -137,4 +137,6 @@ parameters/looping = true
 
 [node name="MusicListener" type="AudioStreamPlayer" parent="."]
 
-[node name="EffectPlayer" type="AudioStreamPlayer" parent="."]
+[node name="FuelEffectPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="NoteEffectPlayer" type="AudioStreamPlayer" parent="."]
