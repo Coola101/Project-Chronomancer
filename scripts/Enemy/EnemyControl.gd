@@ -11,7 +11,9 @@ enum EnemyState {
 @onready var currentState = EnemyState.Idling
 @onready var stalkAggression: float = 0
 @onready var chaseAggression: float = 0
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = $AggressionTimer
+@onready var dmgTImer: Timer = $DamageTimer
+@onready var player = get_tree().get_root().get_child(0).get_node("PlayerCharacter")
 var Player: CollisionObject3D
 var stunCheck: bool
 var coolCheck: bool
@@ -25,8 +27,7 @@ func _ready() -> void:
 	rayCast.exclude_parent = true;
 	currentLocation = global_transform.origin
 	idlePoint = currentLocation
-	await get_tree().create_timer(5).timeout
-	changeState(EnemyState.Stalking)
+	changeState(EnemyState.Idling)
 
 var playerLocation: Vector3
 var currentLocation: Vector3
@@ -100,9 +101,6 @@ func _physics_process(delta):
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
 				
-	
-	#Check collision w/ player
-	#Deal damage
 
 func stunDelay():
 	stunCheck = true
@@ -185,9 +183,11 @@ func _sound_call(sound: float):
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
 		EnemyState.Stalking:
-			if(chaseAggression <= CHASE_THRESHOLD/2):
-				chaseAggression += (sound * difficulty)/2
-			if(sound >= 30/difficulty):
+			if(chaseAggression <= CHASE_THRESHOLD/4):
+				chaseAggression += (sound * difficulty)/6
+			elif(sound > 1):
+				navigation.target_position = playerLocation
+			if(sound >= 10):
 				navigation.target_position = playerLocation
 
 func _on_timer_timeout():
@@ -214,3 +214,21 @@ func _on_timer_timeout():
 			if(chaseAggression <= 0):
 				chaseAggression = 0
 				changeState(EnemyState.Cooldown)
+
+
+func _on_damage_timer_timeout() -> void:
+	#take damage
+	print("TIME")
+	pass # Replace with function body.
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if(body == player):
+		#takeDamage
+		print("IN")
+		dmgTImer.start()
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if(body == player):
+		print("OUT")
+		dmgTImer.stop()

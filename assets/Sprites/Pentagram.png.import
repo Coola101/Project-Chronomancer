@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6l4lw6pf8uan"
-path.s3tc="res://.godot/imported/guy_eyes.png-1caf7d97c468ec13e3bbd79420d48804.s3tc.ctex"
+uid="uid://dowxjw2v3bs1e"
+path.s3tc="res://.godot/imported/Pentagram.png-c7aa6a8c0206fd92498454dd4eaa769b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/Sprites/guy_eyes.png"
-dest_files=["res://.godot/imported/guy_eyes.png-1caf7d97c468ec13e3bbd79420d48804.s3tc.ctex"]
+source_file="res://assets/Sprites/Pentagram.png"
+dest_files=["res://.godot/imported/Pentagram.png-c7aa6a8c0206fd92498454dd4eaa769b.s3tc.ctex"]
 
 [params]
 

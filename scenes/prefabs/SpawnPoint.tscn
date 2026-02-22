@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://crpmwhc04d3hg"]
 
-[ext_resource type="Texture2D" uid="uid://dgym6cw5ovmgd" path="res://assets/Sprites/Blood_Splatter_Concept_1.png" id="2_k5phq"]
+[ext_resource type="Texture2D" uid="uid://dowxjw2v3bs1e" path="res://assets/Sprites/Pentagram.png" id="1_aunpn"]
 
 [node name="SpawnPoint" type="Node3D"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.025
-texture = ExtResource("2_k5phq")
+pixel_size = 0.0175
+texture = ExtResource("1_aunpn")
