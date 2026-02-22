@@ -249,7 +249,7 @@ texture_filter = 0
 texture = ExtResource("11_yo3tn")
 
 [node name="Moon" type="Sprite3D" parent="."]
-transform = Transform3D(-0.9848077, -0.122787826, -0.122787826, 0, 0.7071067, -0.7071067, 0.17364822, -0.69636416, -0.69636416, -7, 3000, 1000)
+transform = Transform3D(-0.9848077, -0.122787826, -0.122787826, 0, 0.7071067, -0.7071067, 0.17364822, -0.69636416, -0.69636416, -7, 10, 1000)
 material_override = SubResource("StandardMaterial3D_o5lcc")
 cast_shadow = 0
 extra_cull_margin = 16384.0

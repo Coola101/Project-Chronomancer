@@ -32,6 +32,6 @@ func sound_event(sound: float):
 
 func _on_moon_timer_timeout() -> void:
 	moon.global_position.y -= 1
-	if(moon.global_position.y <= 0):
+	if(moon.global_position.y <= 0 && !ending):
 		ending = true
 		get_tree().call_group("Enemy", "_initate_endgame", true)

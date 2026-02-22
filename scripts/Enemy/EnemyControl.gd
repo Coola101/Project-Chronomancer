@@ -186,6 +186,7 @@ func findSpawnPoint(mult: int):
 		findSpawnPoint(mult+1)
 		if(mult >= 10): 
 			activeSpawnPoint = defaultSpawnPoint
+			return
 	else:
 		var rand = rng.randi_range(0, viablePoints.size()-1)
 		activeSpawnPoint = spawnPoints[rand]

@@ -81,6 +81,7 @@ func move(speed: float) -> void:
 		velocity.x += direction.x * speed
 		velocity.z += direction.z * speed
 	else:
+		moving = false
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	
@@ -99,10 +100,10 @@ func move(speed: float) -> void:
 		else:
 			currentSound = 0
 		speed_cap = MAX_SPEED
-	#if(moving && !footStep.playing):
-		#footStepSound()
-	#elif(!moving):
-		#footStep.stop()
+	if(moving):
+		footStepSound()
+	elif(!moving):
+		footStep.stop()
 	
 	#Temporarily, the speed capping is placed here. Later it will likely be tied to a grounded state.
 	if ((velocity.x*velocity.x)+(velocity.z*velocity.z) > speed_cap):
@@ -111,7 +112,7 @@ func move(speed: float) -> void:
 		
 
 func footStepSound():
-	footStep.play()
+	if(!footStep.playing): footStep.play()
 	if(currentSound > 1):
 		footStep.pitch_scale = 1.5
 	else:
