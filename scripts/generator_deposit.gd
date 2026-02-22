@@ -8,5 +8,5 @@ func do_interaction():
 	get_tree().get_root().get_child(0).sound_event(10)
 	fuel += 1
 	get_child(1).animation = str(fuel)
-	if(fuel >= 1):
+	if(fuel >= 4):
 		get_tree().get_root().get_child(0).get_node("EnemyBody")._initate_endgame(false)

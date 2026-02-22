@@ -13,6 +13,8 @@ var carrying_generator_fuel: bool = false # Tracks whether or not the player is 
 @onready var pivot := $CameraPivot
 @onready var player_camera := $CameraPivot/Camera3D
 @onready var footStep := $FootstepPlayer
+@onready var enemyChaseTheme := $ChaseListener
+@onready var enemyChaseOpen := $MusicListener
 
 var state # Current state of the player
 var states # Library of all states the player can be in
@@ -109,7 +111,12 @@ func move(speed: float) -> void:
 	if ((velocity.x*velocity.x)+(velocity.z*velocity.z) > speed_cap):
 		velocity.x = speed_cap * direction.x
 		velocity.z = speed_cap * direction.z
-		
+
+func chaseSounds():
+	enemyChaseOpen.play()
+
+func endChaseSound():
+	enemyChaseTheme.stop()
 
 func footStepSound():
 	if(!footStep.playing): footStep.play()
@@ -117,3 +124,7 @@ func footStepSound():
 		footStep.pitch_scale = 1.5
 	else:
 		footStep.pitch_scale = 0.75
+
+
+func _on_music_listener_finished() -> void:
+	enemyChaseTheme.play()

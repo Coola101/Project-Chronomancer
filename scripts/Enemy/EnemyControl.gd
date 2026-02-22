@@ -14,6 +14,7 @@ enum EnemyState {
 @onready var timer: Timer = $AggressionTimer
 @onready var dmgTImer: Timer = $DamageTimer
 @onready var player = get_tree().get_root().get_child(0).get_node("PlayerCharacter")
+@onready var MonsterNoises: AudioStreamPlayer3D = $MonsterNoisePlayer
 @onready var anim: AnimatedSprite3D = $EnemySprite
 var Player: CollisionObject3D
 var stunCheck: bool
@@ -141,13 +142,18 @@ func changeState(newState: EnemyState):
 			anim.play()
 			anim.speed_scale = 0.5
 			timer.start()
+			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dinosaur-growl-487679.mp3")
+			MonsterNoises.play()
 			stalkAggression = 75 * difficulty
 			findSpawnPoint(1)
 			spawnAtPoint()
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
+			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dragon-roar-2-364479.mp3")
+			MonsterNoises.play()
 			timer.start()
 			anim.play()
+			player.chaseSounds()
 			anim.speed_scale = 1
 			chaseAggression = 20 * difficulty
 			velocity = Vector3(0,0,0)
@@ -161,6 +167,8 @@ func changeState(newState: EnemyState):
 			timer.stop()
 			stunCheck = false
 		EnemyState.Cooldown:
+			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-colossal-dragon-roar-329856.mp3")
+			MonsterNoises.play()
 			anim.pause()
 			global_position = idlePoint
 			if(playerHealth <= 10): playerHealth += 1
@@ -170,10 +178,14 @@ func changeState(newState: EnemyState):
 			timer.start()
 		EnemyState.Ending:
 			anim.play()
+			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dragon-roar-2-364479.mp3")
+			MonsterNoises.play()
+			player.chaseSounds()
 			anim.speed_scale = 1.5
 			var newPos = defaultSpawnPoint.global_position
 			newPos.y = currentLocation.y
 			global_position = newPos
+	if(currentState == EnemyState.Chasing && newState != EnemyState.Ending && newState != EnemyState.Chasing): player.endChaseSound()
 	currentState = newState
 
 func findSpawnPoint(mult: int):
@@ -224,6 +236,9 @@ func _on_timer_timeout():
 				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
 				if(stalkAggression <= STALK_THRESHOLD/4):
 					changeState(EnemyState.Cooldown)
+			if(rng.randi_range(0, 100) == 99):
+				MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dinosaur-growl-487679.mp3")
+				MonsterNoises.play()
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
@@ -238,7 +253,7 @@ func _on_timer_timeout():
 func takeDamage():
 	#sound
 	if(currentState == EnemyState.Chasing): playerHealth -= 1
-	elif(currentState == EnemyState.Ending): playerHealth -= 5
+	elif(currentState == EnemyState.Ending): playerHealth -= 3
 	if(playerHealth <= 0):
 		get_tree().change_scene_to_file("res://scenes/Main_Scenes/DeathScreen.tscn")
 

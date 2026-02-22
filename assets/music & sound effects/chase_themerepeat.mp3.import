@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6l6gnd1kt0t3"
+path="res://.godot/imported/chase_themerepeat.mp3-a496f919b01bef8cf0243323d127b5ca.mp3str"
+
+[deps]
+
+source_file="res://assets/music & sound effects/chase_themerepeat.mp3"
+dest_files=["res://.godot/imported/chase_themerepeat.mp3-a496f919b01bef8cf0243323d127b5ca.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
