@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("full_screen"):
 		var is_window: bool = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
@@ -7,7 +10,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_button_start_pressed() -> void:
 	
-	get_tree().change_scene_to_file("res://scenes/MainGameScene.tscn")
+	get_tree().change_scene_to_file("res://scenes/Main_Scenes/MainGameScene.tscn")
 
 
 func _on_button_exit_pressed() -> void:

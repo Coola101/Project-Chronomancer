@@ -1,0 +1,201 @@
+[gd_scene load_steps=13 format=3 uid="uid://7vr6s7ycmv27"]
+
+[ext_resource type="Script" uid="uid://tao0qwtw4y05" path="res://scripts/menu/MainMenu.gd" id="1_tp0ug"]
+[ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="2_spdwf"]
+[ext_resource type="AudioStream" uid="uid://ce75kuaa08bcx" path="res://assets/music & sound effects/main_title_theme.mp3" id="3_j33n3"]
+[ext_resource type="Texture2D" uid="uid://bdxtib2g826bu" path="res://assets/Sprites/Wall_Concept_Wood.png" id="4_qkevi"]
+[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="5_wwklp"]
+[ext_resource type="Texture2D" uid="uid://b6l4lw6pf8uan" path="res://assets/Sprites/guy_eyes.png" id="6_epbr6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pttg"]
+bg_color = Color(0.4627451, 0, 0.023529412, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.76862746, 0.76862746, 0.8, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8av3c"]
+bg_color = Color(0.46396625, 0, 0.024944868, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbnbu"]
+bg_color = Color(0.59, 0.49087998, 0.16519998, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.9843137)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbkqh"]
+bg_color = Color(0.4627451, 0, 0.023529412, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtgmj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g4vmt"]
+modulate_color = Color(1, 1, 1, 0)
+draw_center = false
+
+[node name="DeathScreen" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_tp0ug")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -300.0
+offset_right = 275.0
+offset_bottom = 300.0
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 75
+metadata/_edit_use_anchors_ = true
+
+[node name="Button_Start" type="Button" parent="CanvasLayer"]
+offset_left = 25.0
+offset_top = 224.0
+offset_right = 300.0
+offset_bottom = 299.0
+tooltip_text = "Restart"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("2_spdwf")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4pttg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8av3c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbnbu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_vbkqh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vtgmj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_g4vmt")
+text = "Restart
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button_Exit" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_vertical = 2
+tooltip_text = "Quit
+"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("2_spdwf")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4pttg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8av3c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbnbu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_vbkqh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vtgmj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_g4vmt")
+text = "Quit
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.11528005
+anchor_top = 0.94290125
+anchor_right = 0.7133703
+anchor_bottom = 1.0
+offset_left = -130.80261
+offset_top = -600.0
+offset_right = 329.1974
+offset_bottom = -503.0
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.4627451, 0, 0.023529412, 0.8039216)
+theme_override_fonts/normal_font = ExtResource("2_spdwf")
+theme_override_font_sizes/normal_font_size = 75
+theme_override_font_sizes/bold_font_size = 16
+text = "CLAIMED BY DARKNESS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j33n3")
+volume_db = -1.0
+pitch_scale = 0.75
+autoplay = true
+parameters/looping = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5.4603386, -1)
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("4_qkevi")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, -0.5976574)
+shaded = true
+texture_filter = 0
+texture = ExtResource("5_wwklp")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01, 5.013, -0.5)
+pixel_size = 0.0105
+texture_filter = 0
+texture = ExtResource("6_epbr6")
+
+[connection signal="pressed" from="CanvasLayer/Button_Start" to="CanvasLayer" method="_on_button_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button_Exit" to="CanvasLayer" method="_on_button_exit_pressed"]

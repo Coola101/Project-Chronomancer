@@ -22,6 +22,7 @@ var chaseCheck: bool
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
+	playerHealth = 10;
 	timer.autostart = false
 	timer.wait_time = 0.5
 	rayCast.exclude_parent = true;
@@ -29,6 +30,7 @@ func _ready() -> void:
 	idlePoint = currentLocation
 	changeState(EnemyState.Idling)
 
+var playerHealth: float
 var playerLocation: Vector3
 var currentLocation: Vector3
 var idlePoint: Vector3
@@ -87,7 +89,6 @@ func _physics_process(delta):
 			if(!stunCheck):
 				stunDelay()
 		EnemyState.Cooldown:
-			global_position = idlePoint
 			stalkAggression = 0
 			if(currentState == EnemyState.Chasing):
 				var a = 0
@@ -151,6 +152,8 @@ func changeState(newState: EnemyState):
 			stunCheck = false
 		EnemyState.Cooldown:
 			#retreat into wall
+			global_position = idlePoint
+			if(playerHealth <= 10): playerHealth += 1
 			timer.stop()
 			coolCheck = false
 		EnemyState.Idling:
@@ -215,16 +218,22 @@ func _on_timer_timeout():
 				chaseAggression = 0
 				changeState(EnemyState.Cooldown)
 
+func takeDamage():
+	#sound
+	playerHealth -= 1
+	print("HIT ", playerHealth)
+	if(playerHealth <= 0):
+		get_tree().change_scene_to_file("res://scenes/Main_Scenes/DeathScreen.tscn")
 
 func _on_damage_timer_timeout() -> void:
 	#take damage
-	print("TIME")
+	takeDamage()
 	pass # Replace with function body.
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if(body == player):
 		#takeDamage
-		print("IN")
+		takeDamage()
 		dmgTImer.start()
 
 

@@ -1,34 +1,35 @@
-[gd_scene load_steps=24 format=3 uid="uid://cpyxyyqotph3k"]
+[gd_scene load_steps=25 format=3 uid="uid://cpyxyyqotph3k"]
 
-[ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_isr54"]
-[ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="2_qt15h"]
-[ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="3_1ue8w"]
-[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="3_i4sey"]
-[ext_resource type="Script" uid="uid://4ik52wdtudun" path="res://scripts/MenuLanternAnimator.gd" id="3_qt15h"]
-[ext_resource type="Script" uid="uid://tao0qwtw4y05" path="res://scripts/menu/MainMenu.gd" id="4_6q7l8"]
-[ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="4_fth05"]
-[ext_resource type="Texture2D" uid="uid://b6l4lw6pf8uan" path="res://assets/Sprites/guy_eyes.png" id="5_cre4h"]
+[ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_kgqbl"]
+[ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="2_i1k6i"]
+[ext_resource type="Script" uid="uid://4ik52wdtudun" path="res://scripts/MenuLanternAnimator.gd" id="3_2pdsl"]
+[ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="4_frueq"]
+[ext_resource type="Texture2D" uid="uid://cdp2vfe1n1apm" path="res://assets/Sprites/Enemy.png" id="5_3cla0"]
+[ext_resource type="Texture2D" uid="uid://b6l4lw6pf8uan" path="res://assets/Sprites/guy_eyes.png" id="6_5pkxu"]
+[ext_resource type="Script" uid="uid://tao0qwtw4y05" path="res://scripts/menu/MainMenu.gd" id="7_j8nmb"]
+[ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="8_03mcw"]
+[ext_resource type="AudioStream" uid="uid://ce75kuaa08bcx" path="res://assets/music & sound effects/main_title_theme.mp3" id="9_jend1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g2csr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r87kn"]
-atlas = ExtResource("2_qt15h")
+atlas = ExtResource("2_i1k6i")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sv8ls"]
-atlas = ExtResource("2_qt15h")
+atlas = ExtResource("2_i1k6i")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wjee"]
-atlas = ExtResource("2_qt15h")
+atlas = ExtResource("2_i1k6i")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1fjif"]
-atlas = ExtResource("2_qt15h")
+atlas = ExtResource("2_i1k6i")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0kg5w"]
-atlas = ExtResource("2_qt15h")
+atlas = ExtResource("2_i1k6i")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fth05"]
@@ -55,7 +56,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fth05"]
-atlas = ExtResource("3_i4sey")
+atlas = ExtResource("5_3cla0")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6q7l8"]
@@ -150,7 +151,7 @@ draw_center = false
 [node name="MainMenu" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_isr54")
+mesh_library = ExtResource("1_kgqbl")
 physics_material = SubResource("PhysicsMaterial_g2csr")
 cell_scale = 2.0
 collision_layer = 3
@@ -171,13 +172,13 @@ billboard = 2
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_fth05")
 speed_scale = 0.2
-script = ExtResource("3_qt15h")
+script = ExtResource("3_2pdsl")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="AnimatedSprite3D"]
 light_color = Color(0.9959237, 0.97386616, 0.8526568, 1)
 omni_range = 3.0
 omni_attenuation = -0.2
-script = ExtResource("3_1ue8w")
+script = ExtResource("4_frueq")
 variance = 0.2
 flicker_speed = 1.5
 
@@ -185,7 +186,7 @@ flicker_speed = 1.5
 light_color = Color(0.85775566, 0.75493324, 0.12471465, 1)
 omni_range = 6.0
 omni_attenuation = 0.8
-script = ExtResource("3_1ue8w")
+script = ExtResource("4_frueq")
 variance = 1.5
 flicker_speed = 3.0
 
@@ -201,13 +202,13 @@ sprite_frames = SubResource("SpriteFrames_6q7l8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05082321)
 pixel_size = 0.04
 billboard = 2
-texture = ExtResource("5_cre4h")
+texture = ExtResource("6_5pkxu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i4sey")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("4_6q7l8")
+script = ExtResource("7_j8nmb")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -215,6 +216,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 4
@@ -226,6 +228,7 @@ offset_bottom = 300.0
 grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 75
+metadata/_edit_use_anchors_ = true
 
 [node name="Button_Start" type="Button" parent="CanvasLayer"]
 offset_left = 25.0
@@ -235,7 +238,7 @@ offset_bottom = 299.0
 tooltip_text = "Start"
 theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
 theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
-theme_override_fonts/font = ExtResource("4_fth05")
+theme_override_fonts/font = ExtResource("8_03mcw")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_6q7l8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1ue8w")
@@ -243,6 +246,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fth05")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cre4h")
 theme_override_styles/focus = SubResource("StyleBoxTexture_fth05")
 text = "Start"
+metadata/_edit_use_anchors_ = true
 
 [node name="Button_Exit" type="Button" parent="CanvasLayer"]
 anchors_preset = 4
@@ -256,7 +260,7 @@ grow_vertical = 2
 tooltip_text = "Start"
 theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
 theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
-theme_override_fonts/font = ExtResource("4_fth05")
+theme_override_fonts/font = ExtResource("8_03mcw")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_6q7l8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1ue8w")
@@ -264,12 +268,14 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fth05")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cre4h")
 theme_override_styles/focus = SubResource("StyleBoxTexture_fth05")
 text = "Quit"
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 offset_left = 25.0
 offset_top = 25.0
 offset_right = 537.0
 offset_bottom = 153.0
+metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel"]
 layout_mode = 1
@@ -281,10 +287,11 @@ offset_top = -105.0
 offset_right = 513.0
 offset_bottom = -8.0
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("4_fth05")
+theme_override_fonts/normal_font = ExtResource("8_03mcw")
 theme_override_font_sizes/normal_font_size = 75
 theme_override_font_sizes/bold_font_size = 16
 text = "COLD SNAP"
+metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 2
@@ -294,11 +301,16 @@ offset_left = 25.0
 offset_top = -40.0
 offset_right = 639.0
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("4_fth05")
+theme_override_fonts/normal_font = ExtResource("8_03mcw")
 theme_override_font_sizes/normal_font_size = 24
 text = "Press [F4] to toggle fullscreen"
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jend1")
+volume_db = -17.5
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="CanvasLayer/Button_Start" to="CanvasLayer" method="_on_button_start_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button_Exit" to="CanvasLayer" method="_on_button_exit_pressed"]
