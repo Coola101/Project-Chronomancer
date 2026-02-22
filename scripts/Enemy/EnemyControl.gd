@@ -3,7 +3,7 @@ extends CharacterBody3D
 enum EnemyState { 
 	Idling, Stalking,
 	Chasing, Stunned,
-	Cooldown
+	Cooldown, Ending
 }
 
 @onready var navigation = $NavigationAgent3D
@@ -101,12 +101,17 @@ func _physics_process(delta):
 		EnemyState.Idling:
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
-				
+		EnemyState.Ending:
+			navigation.target_position = playerLocation
+			var nextLocation = navigation.get_next_path_position()
+			var newVelocity = (nextLocation-currentLocation).normalized() * 8.6
+			velocity = velocity.move_toward(newVelocity, 0.25)
+			move_and_slide()
 
 func stunDelay():
 	stunCheck = true
 	await get_tree().create_timer(STUN_TIME).timeout
-	if(currentState == EnemyState.Stunned): (EnemyState.Chasing)
+	if(currentState == EnemyState.Stunned): changeState(EnemyState.Chasing)
 
 func coolDelay():
 	coolCheck = false
@@ -158,6 +163,10 @@ func changeState(newState: EnemyState):
 			coolCheck = false
 		EnemyState.Idling:
 			timer.start()
+		EnemyState.Ending:
+			var newPos = defaultSpawnPoint.global_position
+			newPos.y = currentLocation.y
+			global_position = newPos
 	currentState = newState
 
 func findSpawnPoint(mult: int):
@@ -194,7 +203,7 @@ func _sound_call(sound: float):
 				navigation.target_position = playerLocation
 
 func _on_timer_timeout():
-	print("Stalk: ", stalkAggression, " Chase: ", chaseAggression)
+	print(currentState)
 	match(currentState):
 		EnemyState.Idling:
 			stalkAggression = stalkAggression + (difficulty/3)
@@ -220,8 +229,8 @@ func _on_timer_timeout():
 
 func takeDamage():
 	#sound
-	playerHealth -= 1
-	print("HIT ", playerHealth)
+	if(currentState == EnemyState.Chasing): playerHealth -= 1
+	elif(currentState == EnemyState.Ending): playerHealth -= 5
 	if(playerHealth <= 0):
 		get_tree().change_scene_to_file("res://scenes/Main_Scenes/DeathScreen.tscn")
 
@@ -236,8 +245,12 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		takeDamage()
 		dmgTImer.start()
 
-
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if(body == player):
-		print("OUT")
 		dmgTImer.stop()
+
+func _initate_endgame(bad_end: bool):
+	#play special sound
+	if(bad_end): player.get_node("LanternPivot").hide()
+	await get_tree().create_timer(3).timeout
+	changeState(EnemyState.Ending)
