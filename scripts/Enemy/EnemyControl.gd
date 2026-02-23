@@ -76,13 +76,13 @@ func _physics_process(delta):
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
-			velocity = velocity.move_toward(newVelocity, 0.125)
+			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
-			velocity = velocity.move_toward(newVelocity, 0.125)
+			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 			
 			if(player_safe_zone):
@@ -156,7 +156,7 @@ func changeState(newState: EnemyState):
 			anim.play()
 			player.chaseSounds()
 			anim.speed_scale = 1
-			chaseAggression = 9 * difficulty
+			chaseAggression = 10 * difficulty
 			velocity = Vector3(0,0,0)
 			#if(currentState == EnemyState.Stalking):
 				#Roar
@@ -244,10 +244,12 @@ func _on_timer_timeout():
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
+			print("A ", chaseAggression)
 			if(!checkVisibility()):
 				chaseAggression = chaseAggression - snappedf(2.25/difficulty, 0.1)
 			else:
 				chaseAggression = chaseAggression - snappedf(1.5/difficulty, 0.1)
+			print("B ", chaseAggression)
 			if(chaseAggression <= 0):
 				chaseAggression = 0
 				changeState(EnemyState.Cooldown)
