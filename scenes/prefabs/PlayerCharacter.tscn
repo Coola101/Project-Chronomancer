@@ -130,7 +130,7 @@ pixel_size = 0.0078
 texture_filter = 2
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_jyw7g")
-animation = &"extinguish"
+animation = &"new_animation"
 speed_scale = 1.2
 script = ExtResource("6_rgfg6")
 

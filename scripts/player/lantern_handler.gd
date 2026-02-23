@@ -39,5 +39,6 @@ func _process(delta: float) -> void:
 
 func disable_lantern() -> void:
 	get_child(0).animation = "extinguish"
+	get_child(0).shaded = true
 	get_child(0).get_child(0).visible = false
 	get_child(0).get_child(1).visible = false
