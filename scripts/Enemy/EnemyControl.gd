@@ -55,8 +55,8 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 
 const MAX_HEALTH: float = 6
 
-const chaseSpeed: float = 8.5
-const stalkSpeed: float = 4
+const chaseSpeed: float = 7.5
+const stalkSpeed: float = 3.5
 const STALK_RADIUS: float = 10
 const difficulty: float = 3
 const STALK_THRESHOLD: float = 150
@@ -76,13 +76,13 @@ func _physics_process(delta):
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
-			velocity = velocity.move_toward(newVelocity, 0.25)
+			velocity = velocity.move_toward(newVelocity, 0.2)
 			move_and_slide()
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
-			velocity = velocity.move_toward(newVelocity, 0.25)
+			velocity = velocity.move_toward(newVelocity, 0.2)
 			move_and_slide()
 			
 			if(player_safe_zone):
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		EnemyState.Ending:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
-			var newVelocity = (nextLocation-currentLocation).normalized() * 9
+			var newVelocity = (nextLocation-currentLocation).normalized() * 8
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 
@@ -156,7 +156,7 @@ func changeState(newState: EnemyState):
 			anim.play()
 			player.chaseSounds()
 			anim.speed_scale = 1
-			chaseAggression = 10 * difficulty
+			chaseAggression = 12 * difficulty
 			velocity = Vector3(0,0,0)
 			#if(currentState == EnemyState.Stalking):
 				#Roar
@@ -223,6 +223,8 @@ func _sound_call(sound: float):
 			if(sound >= 10):
 				navigation.target_position = playerLocation
 
+var growlCheck = 3
+
 func _on_timer_timeout():
 	match(currentState):
 		EnemyState.Idling:
@@ -233,23 +235,22 @@ func _on_timer_timeout():
 			if(checkVisibility()):
 				var EnemyToPlayer = playerLocation - currentLocation
 				chaseAggression = chaseAggression + (12*difficulty)/EnemyToPlayer.length()
-				print(chaseAggression)
 			else:
 				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
 				if(stalkAggression <= 0):
 					changeState(EnemyState.Cooldown)
-			if(rng.randi_range(0, 6) == 1 && !MonsterNoises.playing):
+			if(growlCheck == 0 && !MonsterNoises.playing):
+				growlCheck = 3
 				MonsterNoises.stream = load("res://assets/music & sound effects/QuietGrowl.mp3")
 				MonsterNoises.play()
+			elif(!MonsterNoises.playing): growlCheck -= 1
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
-			print("A ", chaseAggression)
 			if(!checkVisibility()):
 				chaseAggression = chaseAggression - snappedf(2.25/difficulty, 0.1)
 			else:
 				chaseAggression = chaseAggression - snappedf(1.5/difficulty, 0.1)
-			print("B ", chaseAggression)
 			if(chaseAggression <= 0):
 				chaseAggression = 0
 				changeState(EnemyState.Cooldown)

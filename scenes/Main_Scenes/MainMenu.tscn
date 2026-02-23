@@ -430,7 +430,8 @@ theme_override_fonts/normal_font = SubResource("FontVariation_5pkxu")
 theme_override_font_sizes/normal_font_size = 16
 text = "[E]									- Interact
 [SHIFT]	- Sprint
-[WASD]		- Move"
+[WASD]		- Move
+[ESC] - Pause"
 scroll_active = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
