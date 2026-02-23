@@ -60,6 +60,7 @@ grow_amount = -14.345
 fixed_size = true
 
 [node name="MainGameScene" type="Node3D"]
+process_mode = 1
 script = ExtResource("1_dl7an")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_11x1d")]
@@ -141,6 +142,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -53)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, 0, -61)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 3617.0

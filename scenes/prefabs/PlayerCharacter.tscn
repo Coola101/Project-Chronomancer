@@ -188,22 +188,27 @@ variance = 0.8
 flicker_speed = 1.8
 
 [node name="FootstepPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("8_cinro")
 volume_db = -17.0
 pitch_scale = 2.0
 parameters/looping = true
 
 [node name="MusicListener" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("9_0dym3")
 
 [node name="FuelEffectPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("11_4khfg")
 
 [node name="NoteEffectPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("12_l04ab")
 volume_db = -0.5
 
 [node name="ChaseListener" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("10_bu41t")
 volume_db = -5.0
 parameters/looping = true
