@@ -25,11 +25,11 @@ func _init() -> void:
 func _process(delta: float) -> void:
 	var target: float
 	if negative:
-		target = base_pos - variance
+		target = base_pos - variance#+(get_parent().velocity.length()/10)
 	else:
-		target = base_pos + variance
+		target = base_pos + variance#+(get_parent().velocity.length()/10)
 	
-	position.y = move_toward(position.y, target, (delta)*flicker_speed)
+	position.y = move_toward(position.y, target, (delta)*flicker_speed*(get_parent().velocity.length()))
 	if negative:
 		if position.y <= target:
 			negative = false

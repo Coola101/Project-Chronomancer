@@ -8,6 +8,7 @@ func do_interaction():
 	get_tree().get_root().get_child(0).sound_event(10)
 	fuel += 1
 	get_child(1).animation = str(fuel)
+	player.get_node("LanternPivot").get_child(1).visible = false
 	if(fuel >= 5):
 		get_tree().get_root().get_child(0).get_node("EnemyBody")._initate_endgame(false)
 		get_child(1).shaded = false

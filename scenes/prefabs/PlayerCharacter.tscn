@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=30 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
 [ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/lantern.png" id="3_5h5gp"]
+[ext_resource type="Texture2D" uid="uid://dj1linp4k0bep" path="res://assets/Sprites/Fuel_Can_Concept.png" id="3_l04ab"]
 [ext_resource type="Script" uid="uid://bgce8tldwahj1" path="res://scripts/player/lantern_handler.gd" id="3_rfbh5"]
 [ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="5_3y507"]
 [ext_resource type="Texture2D" uid="uid://cm8ropyq53rli" path="res://assets/Sprites/lantern_extinguish.png" id="5_bu41t"]
@@ -186,6 +187,13 @@ omni_attenuation = 0.8
 script = ExtResource("5_jyw7g")
 variance = 0.8
 flicker_speed = 1.8
+
+[node name="Sprite3D" type="Sprite3D" parent="LanternPivot"]
+transform = Transform3D(0.42688435, 0, -0.9043061, 0, 1, 0, 0.9043061, 0, 0.42688435, 0.29517877, 0.24682865, -0.1390633)
+visible = false
+pixel_size = 0.0078
+texture_filter = 2
+texture = ExtResource("3_l04ab")
 
 [node name="FootstepPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
