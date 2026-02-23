@@ -8,8 +8,9 @@ func do_interaction():
 	get_tree().get_root().get_child(0).sound_event(10)
 	fuel += 1
 	get_child(1).animation = str(fuel)
-	if(fuel >= 4):
+	if(fuel >= 5):
 		get_tree().get_root().get_child(0).get_node("EnemyBody")._initate_endgame(false)
+		get_child(1).shaded = false
 	
 	var enemy = get_tree().get_root().get_child(0).get_node("EnemyBody")
 	if(enemy.playerHealth <= enemy.MAX_HEALTH): enemy.playerHealth += 3
