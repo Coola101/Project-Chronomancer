@@ -225,21 +225,21 @@ func _sound_call(sound: float):
 func _on_timer_timeout():
 	match(currentState):
 		EnemyState.Idling:
-			stalkAggression = stalkAggression + (difficulty/3)
+			stalkAggression = stalkAggression + (difficulty/2)
 			if(stalkAggression >= STALK_THRESHOLD):
 				changeState(EnemyState.Stalking)
 		EnemyState.Stalking:
 			if(checkVisibility()):
-				chaseAggression = chaseAggression + (2*difficulty)
+				var EnemyToPlayer = playerLocation - currentLocation
+				chaseAggression = chaseAggression + (12*difficulty)/EnemyToPlayer.length()
+				print(chaseAggression)
 			else:
 				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
-				if(stalkAggression <= STALK_THRESHOLD/4):
+				if(stalkAggression <= STALK_THRESHOLD/3):
 					changeState(EnemyState.Cooldown)
-			if(rng.randi_range(0, 5 == 4) && !MonsterNoises.playing):
+			if(rng.randi_range(0, 6) == 1 && !MonsterNoises.playing):
 				MonsterNoises.stream = load("res://assets/music & sound effects/QuietGrowl.mp3")
 				MonsterNoises.play()
-				print("Play")
-			elif(MonsterNoises.playing): print("GO")
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:

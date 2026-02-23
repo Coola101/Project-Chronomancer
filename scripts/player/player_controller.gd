@@ -94,7 +94,7 @@ func move(speed: float) -> void:
 		if(carrying_generator_fuel):
 			currentSound = 10
 		else:
-			currentSound = 5	
+			currentSound = 3	
 		# TODO:  Add call to recognize sound from sprint once added
 	else:
 		if(carrying_generator_fuel):
@@ -105,6 +105,7 @@ func move(speed: float) -> void:
 	if(moving):
 		footStepSound()
 	elif(!moving):
+		currentSound = 0
 		footStep.stop()
 	
 	#Temporarily, the speed capping is placed here. Later it will likely be tied to a grounded state.
