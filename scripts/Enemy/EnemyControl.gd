@@ -24,7 +24,7 @@ var chaseCheck: bool
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
-	playerHealth = 10;
+	playerHealth = 6;
 	timer.autostart = false
 	timer.wait_time = 0.5
 	rayCast.exclude_parent = true;
@@ -57,7 +57,7 @@ const chaseSpeed: float = 8
 const stalkSpeed: float = 4
 const STALK_RADIUS: float = 10
 const difficulty: float = 3
-const STALK_THRESHOLD: float = 200
+const STALK_THRESHOLD: float = 150
 const CHASE_THRESHOLD: float = 20
 const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
@@ -106,7 +106,7 @@ func _physics_process(delta):
 		EnemyState.Ending:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
-			var newVelocity = (nextLocation-currentLocation).normalized() * 8.6
+			var newVelocity = (nextLocation-currentLocation).normalized() * 9
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 
@@ -142,14 +142,14 @@ func changeState(newState: EnemyState):
 			anim.play()
 			anim.speed_scale = 0.5
 			timer.start()
-			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dinosaur-growl-487679.mp3")
+			MonsterNoises.stream = load("res://assets/music & sound effects/StalkStart.mp3")
 			MonsterNoises.play()
 			stalkAggression = 75 * difficulty
 			findSpawnPoint(1)
 			spawnAtPoint()
 			navigation.target_position = getNewStalkTarget()
 		EnemyState.Chasing:
-			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dragon-roar-2-364479.mp3")
+			MonsterNoises.stream = load("res://assets/music & sound effects/Chase.mp3")
 			MonsterNoises.play()
 			timer.start()
 			anim.play()
@@ -167,7 +167,7 @@ func changeState(newState: EnemyState):
 			timer.stop()
 			stunCheck = false
 		EnemyState.Cooldown:
-			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-colossal-dragon-roar-329856.mp3")
+			MonsterNoises.stream = load("res://assets/music & sound effects/Cooldown.mp3")
 			MonsterNoises.play()
 			anim.pause()
 			global_position = idlePoint
@@ -178,13 +178,13 @@ func changeState(newState: EnemyState):
 			timer.start()
 		EnemyState.Ending:
 			anim.play()
-			MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dragon-roar-2-364479.mp3")
+			MonsterNoises.stream = load("res://assets/music & sound effects/Chase.mp3")
 			MonsterNoises.play()
 			player.chaseSounds()
 			anim.speed_scale = 1.5
 			var newPos = defaultSpawnPoint.global_position
 			newPos.y = currentLocation.y
-			global_position = newPos
+			if(currentState == EnemyState.Cooldown || currentState == EnemyState.Idling): global_position = newPos
 	if(currentState == EnemyState.Chasing && newState != EnemyState.Ending && newState != EnemyState.Chasing): player.endChaseSound()
 	currentState = newState
 
@@ -223,7 +223,6 @@ func _sound_call(sound: float):
 				navigation.target_position = playerLocation
 
 func _on_timer_timeout():
-	print(currentState)
 	match(currentState):
 		EnemyState.Idling:
 			stalkAggression = stalkAggression + (difficulty/3)
@@ -236,9 +235,11 @@ func _on_timer_timeout():
 				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
 				if(stalkAggression <= STALK_THRESHOLD/4):
 					changeState(EnemyState.Cooldown)
-			if(rng.randi_range(0, 100) == 99):
-				MonsterNoises.stream = load("res://assets/music & sound effects/dragon-studio-dinosaur-growl-487679.mp3")
+			if(rng.randi_range(0, 5 == 4) && !MonsterNoises.playing):
+				MonsterNoises.stream = load("res://assets/music & sound effects/QuietGrowl.mp3")
 				MonsterNoises.play()
+				print("Play")
+			elif(MonsterNoises.playing): print("GO")
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
@@ -252,7 +253,7 @@ func _on_timer_timeout():
 
 func takeDamage():
 	#sound
-	if(currentState == EnemyState.Chasing): playerHealth -= 1
+	if(currentState == EnemyState.Chasing): playerHealth -= 2
 	elif(currentState == EnemyState.Ending): playerHealth -= 3
 	if(playerHealth <= 0):
 		get_tree().change_scene_to_file("res://scenes/Main_Scenes/DeathScreen.tscn")
