@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://4oagl7iagj7y"]
+[gd_scene load_steps=23 format=3 uid="uid://4oagl7iagj7y"]
 
 [ext_resource type="Texture2D" uid="uid://05qcgv433lp8" path="res://assets/Sprites/wood_concept_2.png" id="1_oaokr"]
 [ext_resource type="Texture2D" uid="uid://cuxbfs2s1c3to" path="res://assets/Sprites/snowy_bricks.png" id="2_yffsq"]
 [ext_resource type="Texture2D" uid="uid://brubmruluw0oi" path="res://assets/Sprites/snow.png" id="3_yffsq"]
 [ext_resource type="Texture2D" uid="uid://bpbpyvji58hth" path="res://assets/Sprites/snowy_bricks_top.png" id="4_yvl76"]
 [ext_resource type="Texture2D" uid="uid://brc5ing27d8c0" path="res://assets/Sprites/snowy_bricks_side.png" id="5_ow325"]
+[ext_resource type="Texture2D" uid="uid://bcby3orfemj1l" path="res://assets/Sprites/Wall_Concept_Brick.png" id="6_bs3tq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6b8q"]
 
@@ -66,6 +67,13 @@ stencil_flags = 2
 [sub_resource type="BoxMesh" id="BoxMesh_pvbt0"]
 lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_u8582")
+
+[sub_resource type="BoxMesh" id="BoxMesh_nhee5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8it8"]
+albedo_texture = ExtResource("6_bs3tq")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -142,3 +150,29 @@ physics_material_override = SubResource("PhysicsMaterial_yffsq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D"]
 shape = SubResource("BoxShape3D_yvl76")
+
+[node name="Floor5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = SubResource("BoxMesh_nhee5")
+skeleton = NodePath("../Wall")
+surface_material_override/0 = SubResource("StandardMaterial3D_u8it8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor5"]
+collision_priority = 2.0
+physics_material_override = SubResource("PhysicsMaterial_oaokr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 0, 0)
+shape = SubResource("BoxShape3D_exr2c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 0, 0)
+shape = SubResource("BoxShape3D_exr2c")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Floor5/StaticBody3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0.475)
+shape = SubResource("BoxShape3D_exr2c")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Floor5/StaticBody3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -0.475)
+shape = SubResource("BoxShape3D_exr2c")
