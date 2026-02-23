@@ -5,7 +5,7 @@ extends RayCast3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if interactLabel.get_parent().get_child_count() <= 1:
+	if interactLabel.get_parent().get_child_count() <= 2:
 		if is_colliding():
 			if get_collider() == null:
 				pass

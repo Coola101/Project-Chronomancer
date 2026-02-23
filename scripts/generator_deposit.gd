@@ -10,3 +10,7 @@ func do_interaction():
 	get_child(1).animation = str(fuel)
 	if(fuel >= 4):
 		get_tree().get_root().get_child(0).get_node("EnemyBody")._initate_endgame(false)
+	
+	var enemy = get_tree().get_root().get_child(0).get_node("EnemyBody")
+	if(enemy.playerHealth <= enemy.MAX_HEALTH): enemy.playerHealth += 3
+	else: enemy.playerHealth = enemy.MAX_HEALTH

@@ -24,7 +24,7 @@ var chaseCheck: bool
 var spawnPoints: Array[Node3D]
 
 func _ready() -> void:
-	playerHealth = 6;
+	playerHealth = MAX_HEALTH;
 	timer.autostart = false
 	timer.wait_time = 0.5
 	rayCast.exclude_parent = true;
@@ -52,6 +52,8 @@ func set_player(pl):
 func initalize_spawn_points(allPoints: Array[Node3D]):
 	defaultSpawnPoint = allPoints[0]
 	spawnPoints = allPoints
+
+const MAX_HEALTH: float = 6
 
 const chaseSpeed: float = 8
 const stalkSpeed: float = 4
@@ -171,7 +173,7 @@ func changeState(newState: EnemyState):
 			MonsterNoises.play()
 			anim.pause()
 			global_position = idlePoint
-			if(playerHealth <= 10): playerHealth += 1
+			#if(playerHealth <= MAX_HEALTH): playerHealth += 1
 			timer.stop()
 			coolCheck = false
 		EnemyState.Idling:

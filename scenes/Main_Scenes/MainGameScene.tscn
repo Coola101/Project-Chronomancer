@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5pb422ahs767"]
+[gd_scene load_steps=20 format=3 uid="uid://b5pb422ahs767"]
 
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_dl7an"]
 [ext_resource type="PackedScene" uid="uid://dvmwvax6gany6" path="res://scenes/prefabs/Enemy.tscn" id="1_xh18f"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://crpmwhc04d3hg" path="res://scenes/prefabs/SpawnPoint.tscn" id="6_11x1d"]
 [ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="7_dl7an"]
 [ext_resource type="PackedScene" uid="uid://d3ht7ha0o8hws" path="res://scenes/prefabs/note_ui.tscn" id="8_dvy6w"]
+[ext_resource type="Script" uid="uid://bw5fa3f6b05xc" path="res://scripts/player/damage_screen_tint.gd" id="9_mfct6"]
 [ext_resource type="Texture2D" uid="uid://c6mce8q6mygsc" path="res://assets/Sprites/moon.png" id="9_o5lcc"]
 [ext_resource type="Texture2D" uid="uid://ft0hs4pmur8h" path="res://assets/Sprites/Blood_Splatter_Concept_2.png" id="10_qv0go"]
 [ext_resource type="Texture2D" uid="uid://dgym6cw5ovmgd" path="res://assets/Sprites/Blood_Splatter_Concept_1.png" id="11_yo3tn"]
@@ -140,6 +141,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -53)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, 0, -61)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 3617.0
+offset_bottom = 1527.0
+mouse_filter = 2
+color = Color(0.6784314, 0.011764706, 0.011764706, 0.2509804)
+script = ExtResource("9_mfct6")
 
 [node name="InteractionAlert" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 8
