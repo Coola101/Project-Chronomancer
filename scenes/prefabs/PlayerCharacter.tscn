@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=23 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
@@ -15,6 +15,10 @@
 radius = 0.7
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rfbh5"]
+atlas = ExtResource("3_5h5gp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycbhk"]
 atlas = ExtResource("3_5h5gp")
 region = Rect2(0, 0, 64, 64)
 
@@ -58,6 +62,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycbhk")
+}],
+"loop": false,
+"name": &"extinguish",
 "speed": 5.0
 }, {
 "frames": [{
@@ -118,8 +130,7 @@ pixel_size = 0.0078
 texture_filter = 2
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_jyw7g")
-animation = &"new_animation"
-frame_progress = 0.6886495
+animation = &"extinguish"
 speed_scale = 1.2
 script = ExtResource("6_rgfg6")
 
