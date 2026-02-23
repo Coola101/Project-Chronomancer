@@ -43,5 +43,5 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = 6
 theme_override_fonts/normal_font = SubResource("FontVariation_7acn8")
 theme_override_font_sizes/normal_font_size = 8
-text = "Your mission is to retrieve fuel tanks and refill the generator. There are four fuel tanks in total. When the moon sets, the blizzard will roll in and snuff out your light and only hope. If you fail, it would mean the end for humanity. Should you succeed, you shall be heralded as a hero for the new age! Good luck."
+text = "Your mission is to retrieve fuel tanks and refill the generator. There are four fuel tanks in total, each is rather heavy and only one can be carried at once. When the moon sets, the blizzard will roll in and snuff out your light and only hope. If you fail, it would mean the end for humanity. Should you succeed, you shall be heralded as a hero for the new age! Good luck."
 scroll_active = false
