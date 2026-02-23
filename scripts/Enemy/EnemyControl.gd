@@ -55,7 +55,7 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 
 const MAX_HEALTH: float = 6
 
-const chaseSpeed: float = 7.5
+const chaseSpeed: float = 7.4
 const stalkSpeed: float = 3.5
 const STALK_RADIUS: float = 10
 const difficulty: float = 3
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		EnemyState.Ending:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
-			var newVelocity = (nextLocation-currentLocation).normalized() * 8
+			var newVelocity = (nextLocation-currentLocation).normalized() * 7.9
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 

@@ -104,8 +104,7 @@ billboard = 2
 shaded = true
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_hcthi")
-animation = &"5"
-frame_progress = 0.37259254
+animation = &"0"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
