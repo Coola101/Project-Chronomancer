@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbaag7v2wd2sv"]
+[gd_scene load_steps=5 format=3 uid="uid://cbaag7v2wd2sv"]
 
+[ext_resource type="Script" uid="uid://cl1lfbmqbb7w3" path="res://scripts/exit_door.gd" id="1_kumri"]
 [ext_resource type="Texture2D" uid="uid://b4g6r4p8cesus" path="res://assets/Sprites/door.png" id="1_ragvh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kumri"]
@@ -8,8 +9,11 @@ size = Vector3(1, 1, 0.34869385)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mw21i"]
 size = Vector3(0.8, 1, 0.24956053)
 
-[node name="ExitDoor" type="Area3D"]
+[node name="ExitDoor" type="Area3D" groups=["exit_door"]]
 transform = Transform3D(-5, 0, -4.371139e-07, 0, 5, 0, 4.371139e-07, 0, -5, 0, 0, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_kumri")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 2.220446e-16, 0, -0.016998291)

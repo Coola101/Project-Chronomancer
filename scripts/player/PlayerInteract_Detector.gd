@@ -1,7 +1,7 @@
 extends RayCast3D
 
 @onready var interactLabel = get_tree().get_root().get_child(0).get_node("CanvasLayer").get_node("InteractionAlert")
-@onready var generator = get_tree().get_root().get_child(0).get_node("generator_deposit")
+@onready var generator = get_tree().get_root().get_child(0).get_node("GeneratorDeposit")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
