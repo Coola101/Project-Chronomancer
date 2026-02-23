@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 			controls_note.position.y = move_toward(controls_note.position.y,controls_note.get_viewport_rect().size.y*2,delta*550)
 
 func _on_button_start_pressed() -> void:
-	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_tree().change_scene_to_file("res://scenes/Main_Scenes/MainGameScene.tscn")
 
 

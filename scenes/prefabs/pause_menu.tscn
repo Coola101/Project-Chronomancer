@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhsmfae80a5mj"]
+
+[ext_resource type="Script" uid="uid://byuv5cfydjpfm" path="res://scripts/menu/pause_menu.gd" id="1_eg4qb"]
+[ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="1_fwcej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwcej"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.3764706)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg4qb"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.76862746, 0.76862746, 0.8, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03xv0"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnw7q"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.9843137, 0.85490197, 0.30980393, 0.9843137)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0w8p4"]
+bg_color = Color(0.101960786, 0.101960786, 0.20392157, 0.8039216)
+border_width_left = 6
+border_width_top = 5
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 15
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 15
+corner_detail = 3
+shadow_size = 25
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dvwoo"]
+modulate_color = Color(1, 1, 1, 0)
+draw_center = false
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+script = ExtResource("1_eg4qb")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -49.0
+offset_top = -391.0
+offset_right = 366.0
+offset_bottom = 994.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fwcej")
+
+[node name="Button_Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = 75.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+tooltip_text = "Start"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("1_fwcej")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_eg4qb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_03xv0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tnw7q")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0w8p4")
+theme_override_styles/focus = SubResource("StyleBoxTexture_dvwoo")
+text = "Main Menu"
+
+[node name="Button_Resume" type="Button" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = -75.0
+tooltip_text = "Start"
+theme_override_colors/font_pressed_color = Color(0.85490197, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_hover_color = Color(0.9843137, 0.85490197, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("1_fwcej")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_eg4qb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_03xv0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tnw7q")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0w8p4")
+theme_override_styles/focus = SubResource("StyleBoxTexture_dvwoo")
+text = "Continue"
+
+[connection signal="pressed" from="Button_Menu" to="." method="_on_button_menu_pressed"]
+[connection signal="pressed" from="Button_Resume" to="." method="_on_button_resume_pressed"]
