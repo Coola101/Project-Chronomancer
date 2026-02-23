@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b13cdsocjpdpl"]
+[gd_scene load_steps=15 format=3 uid="uid://b13cdsocjpdpl"]
 
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_762s5"]
 [ext_resource type="MeshLibrary" uid="uid://d3taxeua5m1dl" path="res://assets/MeshLibrary.tres" id="1_ldeur"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://dyrhlqjquuyqk" path="res://assets/VCR_OSD_MONO.ttf" id="5_v6jby"]
 [ext_resource type="PackedScene" uid="uid://crpmwhc04d3hg" path="res://scenes/prefabs/SpawnPoint.tscn" id="6_4qp8f"]
 [ext_resource type="Shader" uid="uid://7pakkbdumven" path="res://default.gdshader" id="6_oq6wr"]
+[ext_resource type="PackedScene" uid="uid://c4e57lx6vosla" path="res://scenes/prefabs/readable_note.tscn" id="8_saj56"]
+[ext_resource type="PackedScene" uid="uid://7cx2qp2bljiw" path="res://scenes/prefabs/generator_fuel_pickup.tscn" id="9_a6y2l"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5v1nd"]
 vertices = PackedVector3Array(14.25, 2.5, -11.25, 12.75, 2.5, -11.25, 12.75, 2.5, -9.75, 12.25, 2.5, 8.75, 8.75, 2.5, 8.75, 9.5, 2.5, 9.75, 12.5, 2.5, 9.5, 29.5, 2.5, -11.5, 28.25, 2.5, -11.25, 32.5, 2.5, -10.5, 36.75, 2.5, -10.25, 37.5, 2.5, -11.25, 12.75, 2.5, 8.25, 12.75, 2.5, 11.5, 19.5, 2.5, 10.5, 18.25, 2.5, 6.75, 8.25, 2.5, 16.75, 4.75, 2.5, 16.75, 4.75, 2.5, 17.5, 8.5, 2.5, 17.5, 5.75, 2.5, -9.25, 4.75, 2.5, -8.5, 12.5, 2.5, -8.5, 12.25, 2.5, -9.25, 8.75, 2.5, 16.25, 8.75, 2.5, 19.5, 9.75, 2.5, 18.75, 25.5, 2.5, 6.75, 24.75, 2.5, 6.75, 24.75, 2.5, 10.25, 35.5, 2.5, 12.75, 30.75, 2.5, 12.75, 31.5, 2.5, 13.75, 34.75, 2.5, 13.75, 21.5, 2.5, -22.25, 20.75, 2.5, -22.25, 20.75, 2.5, -11.75, 21.5, 2.5, -11.5, 33.5, 2.5, -10.25, 30.75, 2.5, 18.25, 31.5, 2.5, 18.5, 20.25, 2.5, -11.25, 23.75, 2.5, -5.25, 23.5, 2.5, -10.25, 30.25, 2.5, 18.75, 34.25, 2.5, 18.75, 35.5, 2.5, 19.5, 32.75, 2.5, -5.75, 33.5, 2.5, -5.5, 28.75, 2.5, -23.75, 28.75, 2.5, -22.25, 29.5, 2.5, -29.25, 32.25, 2.5, -5.25, 36.25, 2.5, -5.25, 32.5, 2.5, -4.5, 33.5, 2.5, -4.25, 37.5, 2.5, -4.5, 24.25, 2.5, 18.75, 32.25, 2.5, 2.75, 30.75, 2.5, 2.75, 30.75, 2.5, 7.5, 35.5, 2.5, 7.5, 35.5, 2.5, 2.75, 33.5, 2.5, 2.5, 34.75, 2.5, 18.25, 12.75, 2.5, -29.25, 13.5, 2.5, -28.25, 28.5, 2.5, -28.5, 12.75, 2.5, -0.5, 18.75, 2.5, -0.25, 19.5, 2.5, -0.25, 32.75, 2.5, 2.25, 12.75, 2.5, 6.75, 28.75, 2.5, -11.75, 24.75, 2.5, 18.25, 25.5, 2.5, 18.5, 13.5, 2.5, -22.25, 13.75, 2.5, -23.25, 12.75, 2.5, -19.75, 23.5, 2.5, -0.5, 23.75, 2.5, -4.5, 24.5, 2.5, 11.5, 24.25, 2.5, 10.75, 5.5, 2.5, -18.25, 4.75, 2.5, -19.25, 36.75, 2.5, -5.75, 18.75, 2.5, 6.25, 12.25, 2.5, -19.25, 14.5, 2.5, -18.5, 13.5, 2.5, -19.5, 15.25, 2.5, -19.25, 15.25, 2.5, -11.5, 14.75, 2.5, -11.75, 28.25, 2.5, -23.25)
@@ -105,3 +107,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 5)
 
 [node name="SpawnPoint3" parent="SpawnPointHolder" instance=ExtResource("6_4qp8f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.73645, 0, 9.43692)
+
+[node name="GeneratorFuelPickup" parent="." instance=ExtResource("9_a6y2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, -11)
+
+[node name="ReadableNote" parent="." instance=ExtResource("8_saj56")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, -11.99)

@@ -24,6 +24,8 @@ window/stretch/mode="canvas_items"
 Enemy="The Enemy"
 generator_fuel=""
 generator_deposit=""
+readable_note=""
+exit_door=""
 
 [input]
 

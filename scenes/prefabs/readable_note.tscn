@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4e57lx6vosla"]
+
+[ext_resource type="Texture2D" uid="uid://bgslpmx8cmatd" path="res://assets/Sprites/note.png" id="1_1ahpm"]
+[ext_resource type="Script" uid="uid://dx2u8yxfiuac4" path="res://scripts/note_read.gd" id="1_37e7b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37e7b"]
+size = Vector3(0.5, 0.5, 0.2)
+
+[node name="ReadableNote" type="Area3D" groups=["readable_note"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_37e7b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["readable_note"]]
+shape = SubResource("BoxShape3D_37e7b")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0313
+texture_filter = 2
+texture = ExtResource("1_1ahpm")
