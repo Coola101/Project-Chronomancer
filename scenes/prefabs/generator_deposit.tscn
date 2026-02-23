@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1701x6w036hn"]
+[gd_scene load_steps=13 format=3 uid="uid://1701x6w036hn"]
 
 [ext_resource type="Script" uid="uid://co3c4nl357j6o" path="res://scripts/generator_deposit.gd" id="1_kbs48"]
 [ext_resource type="Texture2D" uid="uid://dwwfibjvibpyc" path="res://assets/Sprites/generator.png" id="1_rcdtx"]
@@ -28,6 +28,10 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hcthi"]
 atlas = ExtResource("1_rcdtx")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg5ej"]
+atlas = ExtResource("1_rcdtx")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hcthi"]
 animations = [{
@@ -66,13 +70,21 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hilbo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hcthi")
 }],
 "loop": true,
 "name": &"4",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcthi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg5ej")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kbs48"]
@@ -92,7 +104,8 @@ billboard = 2
 shaded = true
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_hcthi")
-animation = &"0"
+animation = &"5"
+frame_progress = 0.37259254
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
