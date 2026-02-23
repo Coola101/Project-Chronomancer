@@ -156,7 +156,7 @@ func changeState(newState: EnemyState):
 			anim.play()
 			player.chaseSounds()
 			anim.speed_scale = 1
-			chaseAggression = 20 * difficulty
+			chaseAggression = 9 * difficulty
 			velocity = Vector3(0,0,0)
 			#if(currentState == EnemyState.Stalking):
 				#Roar
@@ -236,7 +236,7 @@ func _on_timer_timeout():
 				print(chaseAggression)
 			else:
 				stalkAggression = stalkAggression - snappedf(1/difficulty, 0.1)
-				if(stalkAggression <= STALK_THRESHOLD/3):
+				if(stalkAggression <= 0):
 					changeState(EnemyState.Cooldown)
 			if(rng.randi_range(0, 6) == 1 && !MonsterNoises.playing):
 				MonsterNoises.stream = load("res://assets/music & sound effects/QuietGrowl.mp3")
@@ -245,9 +245,9 @@ func _on_timer_timeout():
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
 			if(!checkVisibility()):
-				chaseAggression = chaseAggression - snappedf(2/difficulty, 0.1)
+				chaseAggression = chaseAggression - snappedf(2.25/difficulty, 0.1)
 			else:
-				chaseAggression = chaseAggression - snappedf(1/difficulty, 0.1)
+				chaseAggression = chaseAggression - snappedf(1.5/difficulty, 0.1)
 			if(chaseAggression <= 0):
 				chaseAggression = 0
 				changeState(EnemyState.Cooldown)

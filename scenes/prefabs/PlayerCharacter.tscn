@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bwjtujdb6ehhp" path="res://assets/music & sound effects/Snowfootsteps - Made with Clipchamp.mp3" id="8_cinro"]
 [ext_resource type="AudioStream" uid="uid://dffm86sgsplvn" path="res://assets/music & sound effects/chase_theme.mp3" id="9_0dym3"]
 [ext_resource type="AudioStream" uid="uid://6l6gnd1kt0t3" path="res://assets/music & sound effects/chase_themerepeat.mp3" id="10_bu41t"]
-[ext_resource type="AudioStream" uid="uid://cj1uci1teoc10" path="res://assets/music & sound effects/FuelSound.mp3" id="11_4khfg"]
+[ext_resource type="AudioStream" uid="uid://buygq0blef3uq" path="res://assets/music & sound effects/FuelSounds.mp3" id="11_4khfg"]
 [ext_resource type="AudioStream" uid="uid://c63jvul3a1la8" path="res://assets/music & sound effects/paper_Sfx.mp3" id="12_l04ab"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
