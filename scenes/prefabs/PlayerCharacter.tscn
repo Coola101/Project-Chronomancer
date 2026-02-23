@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=27 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
 [ext_resource type="Texture2D" uid="uid://dt0um6wg57b0h" path="res://assets/Sprites/lantern.png" id="3_5h5gp"]
 [ext_resource type="Script" uid="uid://bgce8tldwahj1" path="res://scripts/player/lantern_handler.gd" id="3_rfbh5"]
 [ext_resource type="Texture2D" uid="uid://d2tnuctu33xva" path="res://assets/Sprites/Lantern_anim-Sheet.png" id="5_3y507"]
+[ext_resource type="Texture2D" uid="uid://cm8ropyq53rli" path="res://assets/Sprites/lantern_extinguish.png" id="5_bu41t"]
 [ext_resource type="Script" uid="uid://d373byuq0phqp" path="res://scripts/light_flicker.gd" id="5_jyw7g"]
 [ext_resource type="Script" uid="uid://4ik52wdtudun" path="res://scripts/MenuLanternAnimator.gd" id="6_rgfg6"]
 [ext_resource type="AudioStream" uid="uid://bwjtujdb6ehhp" path="res://assets/music & sound effects/Snowfootsteps - Made with Clipchamp.mp3" id="8_cinro"]
@@ -19,8 +20,20 @@ atlas = ExtResource("3_5h5gp")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycbhk"]
-atlas = ExtResource("3_5h5gp")
+atlas = ExtResource("5_bu41t")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b45la"]
+atlas = ExtResource("5_bu41t")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0rny"]
+atlas = ExtResource("5_bu41t")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kojqe"]
+atlas = ExtResource("5_bu41t")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgfg6"]
 atlas = ExtResource("5_3y507")
@@ -67,6 +80,27 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ycbhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b45la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycbhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b45la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0rny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b45la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0rny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kojqe")
 }],
 "loop": false,
 "name": &"extinguish",
