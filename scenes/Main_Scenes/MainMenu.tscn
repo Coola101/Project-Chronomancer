@@ -311,6 +311,7 @@ offset_top = -40.0
 offset_right = -25.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("8_03mcw")
 theme_override_font_sizes/normal_font_size = 24
 text = "View Controls - [E]"
@@ -386,6 +387,7 @@ offset_left = 25.0
 offset_top = -40.0
 offset_right = 639.0
 grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("8_03mcw")
 theme_override_font_sizes/normal_font_size = 24
 text = "[F4] - Toggle Fullscreen"
@@ -431,7 +433,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "[E]									- Interact
 [SHIFT]	- Sprint
 [WASD]		- Move
-[ESC] - Pause"
+[ESC]					- Pause"
 scroll_active = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
