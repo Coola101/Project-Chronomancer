@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=22 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
@@ -21,6 +21,10 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgfg6"]
 atlas = ExtResource("5_3y507")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l04ab"]
+atlas = ExtResource("5_3y507")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cinro"]
 atlas = ExtResource("5_3y507")
@@ -59,6 +63,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rgfg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l04ab")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cinro")
@@ -112,7 +119,8 @@ texture_filter = 2
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_jyw7g")
 animation = &"new_animation"
-speed_scale = 0.3
+frame_progress = 0.6886495
+speed_scale = 1.2
 script = ExtResource("6_rgfg6")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="LanternPivot/AnimatedSprite3D"]

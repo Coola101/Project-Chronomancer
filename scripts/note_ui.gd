@@ -13,14 +13,14 @@ func _process(delta: float) -> void:
 		if ref.a < 255:
 			ref.a = move_toward(ref.a,255,delta*2)
 			set_modulate(ref)
-		if position.y > (get_viewport().get_visible_rect().size.y/6):
-			position.y = move_toward(position.y,get_viewport_rect().size.y/6,delta*550)
+		if position.y > (get_viewport().get_visible_rect().size.y/5):
+			position.y = move_toward(position.y,get_viewport_rect().size.y/5,delta*550)
 		
 		if Input.is_action_just_pressed("interact"):
 			reading = false
 	else:
 		if ref.a > 0:
-			ref.a = move_toward(ref.a,0,delta*2)
+			ref.a = move_toward(ref.a,0,delta*4)
 			set_modulate(ref)
 		if position.y < (get_viewport().get_visible_rect().size.y*2):
 			position.y = move_toward(position.y,get_viewport_rect().size.y*2,delta*550)

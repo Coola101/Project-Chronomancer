@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3ht7ha0o8hws"]
+[gd_scene load_steps=5 format=3 uid="uid://d3ht7ha0o8hws"]
 
 [ext_resource type="Texture2D" uid="uid://bm6dt13vr8q6d" path="res://assets/Sprites/NoteClose.png" id="1_6jqwv"]
 [ext_resource type="Script" uid="uid://k5mtc6t1e8mb" path="res://scripts/note_ui.gd" id="1_q8yh7"]
+[ext_resource type="FontFile" uid="uid://beacf0p5s0ci4" path="res://assets/MainFont.ttf" id="3_q8yh7"]
+
+[sub_resource type="FontVariation" id="FontVariation_7acn8"]
+base_font = ExtResource("3_q8yh7")
+spacing_space = 4
 
 [node name="NoteUi" type="Control"]
 modulate = Color(1, 1, 1, 0)
@@ -23,12 +28,20 @@ layout_mode = 0
 offset_left = -256.0
 offset_bottom = 256.0
 scale = Vector2(2, 2)
+mouse_filter = 2
 texture = ExtResource("1_6jqwv")
 
-[node name="RichTextLabel" type="Label" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
 layout_mode = 0
-offset_left = -128.0
+offset_left = -150.5
 offset_top = 75.0
-offset_right = 365.0
+offset_right = 192.0
 offset_bottom = 331.0
-text = "Long has it been since I have been graced by pleasant company."
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = SubResource("FontVariation_7acn8")
+theme_override_font_sizes/normal_font_size = 8
+text = "Your mission is to retrieve fuel tanks and refill the generator. There are four fuel tanks in total. When the moon sets, the blizzard will roll in and snuff out your light and only hope. If you fail, it would mean the end for humanity. Should you succeed, you shall be heralded as a hero for the new age! Good luck."
+scroll_active = false
