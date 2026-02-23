@@ -300,6 +300,23 @@ offset_bottom = 40.0
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_top = -40.0
+offset_right = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("8_03mcw")
+theme_override_font_sizes/normal_font_size = 24
+text = "View Controls - [E]"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 4
 anchor_top = 0.5
@@ -371,10 +388,11 @@ offset_right = 639.0
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("8_03mcw")
 theme_override_font_sizes/normal_font_size = 24
-text = "Press [F4] to toggle fullscreen"
+text = "[F4] - Toggle Fullscreen"
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="CanvasLayer"]
+[node name="ControlsNote" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -386,7 +404,7 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/Control2"]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/ControlsNote"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -369.0
@@ -397,7 +415,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("10_frueq")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ControlsNote"]
 clip_contents = false
 layout_mode = 0
 offset_left = -263.5
