@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=29 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://bwjtujdb6ehhp" path="res://assets/music & sound effects/Snowfootsteps - Made with Clipchamp.mp3" id="8_cinro"]
 [ext_resource type="AudioStream" uid="uid://dffm86sgsplvn" path="res://assets/music & sound effects/chase_theme.mp3" id="9_0dym3"]
 [ext_resource type="AudioStream" uid="uid://6l6gnd1kt0t3" path="res://assets/music & sound effects/chase_themerepeat.mp3" id="10_bu41t"]
+[ext_resource type="AudioStream" uid="uid://cj1uci1teoc10" path="res://assets/music & sound effects/FuelSound.mp3" id="11_4khfg"]
+[ext_resource type="AudioStream" uid="uid://c63jvul3a1la8" path="res://assets/music & sound effects/paper_Sfx.mp3" id="12_l04ab"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
 radius = 0.7
@@ -195,12 +197,13 @@ parameters/looping = true
 stream = ExtResource("9_0dym3")
 
 [node name="FuelEffectPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_4khfg")
 
 [node name="NoteEffectPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_l04ab")
+volume_db = -0.5
 
 [node name="ChaseListener" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_bu41t")
 volume_db = -5.0
 parameters/looping = true
-
-[connection signal="finished" from="MusicListener" to="." method="_on_music_listener_finished"]

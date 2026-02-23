@@ -55,16 +55,15 @@ func initalize_spawn_points(allPoints: Array[Node3D]):
 
 const MAX_HEALTH: float = 6
 
-const chaseSpeed: float = 8
+const chaseSpeed: float = 8.5
 const stalkSpeed: float = 4
 const STALK_RADIUS: float = 10
 const difficulty: float = 3
 const STALK_THRESHOLD: float = 150
-const CHASE_THRESHOLD: float = 20
+const CHASE_THRESHOLD: float = 25
 const MAX_DISTANCE: float = 20
 const STUN_TIME: float = 2.5
 const COOLDOWN_TIME: float = 30
-const CHASE_TIME: float = 180
 const AGGRESSION_INTERVAL: float = 60
 const SPAWN_DISTANCE: float = 30
 
@@ -77,13 +76,13 @@ func _physics_process(delta):
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
-			velocity = velocity.move_toward(newVelocity, 0.25)
+			velocity = velocity.move_toward(newVelocity, 0.125)
 			move_and_slide()
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
-			velocity = velocity.move_toward(newVelocity, 0.25)
+			velocity = velocity.move_toward(newVelocity, 0.125)
 			move_and_slide()
 			
 			if(player_safe_zone):

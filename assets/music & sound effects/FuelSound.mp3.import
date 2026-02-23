@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cj1uci1teoc10"
+path="res://.godot/imported/FuelSound.mp3-94546d80ae3092a309b3c18c44ca90da.mp3str"
+
+[deps]
+
+source_file="res://assets/music & sound effects/FuelSound.mp3"
+dest_files=["res://.godot/imported/FuelSound.mp3-94546d80ae3092a309b3c18c44ca90da.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

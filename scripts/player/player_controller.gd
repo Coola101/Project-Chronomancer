@@ -15,6 +15,8 @@ var carrying_generator_fuel: bool = false # Tracks whether or not the player is 
 @onready var footStep := $FootstepPlayer
 @onready var enemyChaseTheme := $ChaseListener
 @onready var enemyChaseOpen := $MusicListener
+@onready var fuelListen := $FuelEffectPlayer
+@onready var noteListen := $NoteEffectPlayer
 
 var state # Current state of the player
 var states # Library of all states the player can be in
@@ -115,6 +117,8 @@ func move(speed: float) -> void:
 
 func chaseSounds():
 	enemyChaseOpen.play()
+	await get_tree().create_timer(22.14).timeout
+	enemyChaseTheme.play()
 
 func endChaseSound():
 	enemyChaseTheme.stop()
@@ -126,6 +130,9 @@ func footStepSound():
 	else:
 		footStep.pitch_scale = 0.75
 
+func playFuel():
+	fuelListen.play()
 
-func _on_music_listener_finished() -> void:
-	enemyChaseTheme.play()
+func playNote():
+	noteListen.play()
+	
