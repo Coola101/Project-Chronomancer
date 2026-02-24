@@ -17,6 +17,7 @@ var carrying_generator_fuel: bool = false # Tracks whether or not the player is 
 @onready var enemyChaseOpen := $MusicListener
 @onready var fuelListen := $FuelEffectPlayer
 @onready var noteListen := $NoteEffectPlayer
+@onready var pickupListen := $PickupListener
 
 var state # Current state of the player
 var states # Library of all states the player can be in
@@ -25,6 +26,9 @@ var moving: bool
 var currentSound: float = 0
 func get_sound_level() -> float:
 	return currentSound
+
+func playPickup():
+	pickupListen.play()
 
 func _init() -> void:
 	states = {

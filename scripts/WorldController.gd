@@ -5,6 +5,7 @@ extends Node
 @onready var soundTimer = $SoundTimer
 @onready var moon = $Moon
 @onready var moonTimer = $MoonTimer
+@onready var windSound = $Moon/AudioStreamPlayer
 var ending: bool = false
 
 var spawnPoints: Array[Node3D]
@@ -31,7 +32,9 @@ func sound_event(sound: float):
 	get_tree().call_group("Enemy", "_sound_call", sound)
 
 func _on_moon_timer_timeout() -> void:
-	moon.global_position.y -= 1
+	moon.global_position.y -= 1.6
+	windSound.volume_db += 0.02
 	if(moon.global_position.y <= 0 && !ending):
+		
 		ending = true
 		get_tree().call_group("Enemy", "_initate_endgame", true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b5pb422ahs767"]
+[gd_scene load_steps=21 format=3 uid="uid://b5pb422ahs767"]
 
 [ext_resource type="Script" uid="uid://c1dufyu0afcem" path="res://scripts/WorldController.gd" id="1_dl7an"]
 [ext_resource type="PackedScene" uid="uid://dvmwvax6gany6" path="res://scenes/prefabs/Enemy.tscn" id="1_xh18f"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://ft0hs4pmur8h" path="res://assets/Sprites/Blood_Splatter_Concept_2.png" id="10_qv0go"]
 [ext_resource type="Texture2D" uid="uid://dgym6cw5ovmgd" path="res://assets/Sprites/Blood_Splatter_Concept_1.png" id="11_yo3tn"]
 [ext_resource type="PackedScene" uid="uid://c4e57lx6vosla" path="res://scenes/prefabs/readable_note.tscn" id="13_1te7l"]
-[ext_resource type="AudioStream" uid="uid://dx0gpx00wtv7c" path="res://assets/music & sound effects/Wind.mp3" id="14_xuvdl"]
 [ext_resource type="Texture2D" uid="uid://co0nps757l6o4" path="res://assets/Sprites/exit_sign.png" id="16_m8y6n"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_3h06o"]
@@ -66,13 +65,13 @@ process_mode = 1
 script = ExtResource("1_dl7an")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_11x1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3.25, -50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.25, -46)
 
 [node name="EnemyBody" parent="." instance=ExtResource("1_xh18f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, -72)
 
 [node name="GeneratorDeposit" parent="." instance=ExtResource("4_dl7an")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7, 3, -45)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7, 3, -42)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_3h06o")
@@ -196,7 +195,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 27)
 environment = SubResource("Environment_dj5d6")
 
 [node name="MoonTimer" type="Timer" parent="."]
-wait_time = 0.125
+wait_time = 0.25
 autostart = true
 
 [node name="BloodHolder" type="Node3D" parent="."]
@@ -259,7 +258,7 @@ texture_filter = 0
 texture = ExtResource("11_yo3tn")
 
 [node name="Moon" type="Sprite3D" parent="."]
-transform = Transform3D(-0.9848077, -0.122787826, -0.122787826, 0, 0.7071067, -0.7071067, 0.17364822, -0.69636416, -0.69636416, -7, 3000, 1000)
+transform = Transform3D(-0.9848077, -0.122787826, -0.122787826, 0, 0.7071067, -0.7071067, 0.17364822, -0.69636416, -0.69636416, -7, 3600, 1000)
 material_override = SubResource("StandardMaterial3D_o5lcc")
 cast_shadow = 0
 extra_cull_margin = 16384.0
@@ -269,13 +268,6 @@ billboard = 1
 fixed_size = true
 texture_filter = 0
 texture = ExtResource("9_o5lcc")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Moon"]
-process_mode = 3
-stream = ExtResource("14_xuvdl")
-volume_db = -35.0
-autoplay = true
-parameters/looping = true
 
 [node name="ExitDoor" parent="." instance=ExtResource("2_hxqde")]
 transform = Transform3D(-5, 0, -7.54979e-07, 0, 5, 0, 7.54979e-07, 0, -5, -7, 3.5486307, 29.94723)

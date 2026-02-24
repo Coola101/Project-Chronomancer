@@ -76,13 +76,13 @@ func _physics_process(delta):
 				$Target.position = navigation.target_position
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * stalkSpeed
-			velocity = velocity.move_toward(newVelocity, 0.2)
+			velocity = velocity.move_toward(newVelocity, 0.225)
 			move_and_slide()
 		EnemyState.Chasing:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
 			var newVelocity = (nextLocation-currentLocation).normalized() * chaseSpeed
-			velocity = velocity.move_toward(newVelocity, 0.2)
+			velocity = velocity.move_toward(newVelocity, 0.225)
 			move_and_slide()
 			
 			if(player_safe_zone):
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		EnemyState.Ending:
 			navigation.target_position = playerLocation
 			var nextLocation = navigation.get_next_path_position()
-			var newVelocity = (nextLocation-currentLocation).normalized() * 7.9
+			var newVelocity = (nextLocation-currentLocation).normalized() * 7.95
 			velocity = velocity.move_toward(newVelocity, 0.25)
 			move_and_slide()
 
@@ -247,6 +247,11 @@ func _on_timer_timeout():
 			if(chaseAggression >= CHASE_THRESHOLD):
 				changeState(EnemyState.Chasing)
 		EnemyState.Chasing:
+			if(growlCheck == 0 && !MonsterNoises.playing):
+				growlCheck = 3
+				MonsterNoises.stream = load("res://assets/music & sound effects/QuietGrowl.mp3")
+				MonsterNoises.play()
+			elif(!MonsterNoises.playing): growlCheck -= 1
 			if(!checkVisibility()):
 				chaseAggression = chaseAggression - snappedf(2.25/difficulty, 0.1)
 			else:

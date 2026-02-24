@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://colqt1a2lsves"]
+[gd_scene load_steps=31 format=3 uid="uid://colqt1a2lsves"]
 
 [ext_resource type="Script" uid="uid://dwgln5richmut" path="res://scripts/player/player_controller.gd" id="1_xewlb"]
 [ext_resource type="Script" uid="uid://bsk5jvnoyw1yp" path="res://scripts/player/PlayerInteract_Detector.gd" id="2_htlai"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://6l6gnd1kt0t3" path="res://assets/music & sound effects/chase_themerepeat.mp3" id="10_bu41t"]
 [ext_resource type="AudioStream" uid="uid://buygq0blef3uq" path="res://assets/music & sound effects/FuelSounds.mp3" id="11_4khfg"]
 [ext_resource type="AudioStream" uid="uid://c63jvul3a1la8" path="res://assets/music & sound effects/paper_Sfx.mp3" id="12_l04ab"]
+[ext_resource type="AudioStream" uid="uid://ct4gjfqa2kw43" path="res://assets/music & sound effects/FuelPickup.mp3" id="15_ycbhk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghdc6"]
 radius = 0.7
@@ -220,3 +221,6 @@ process_mode = 3
 stream = ExtResource("10_bu41t")
 volume_db = -5.0
 parameters/looping = true
+
+[node name="PickupListener" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ycbhk")
